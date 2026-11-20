@@ -18,7 +18,11 @@ const eventHref = `/tapahtumat/${event.slug}/`;
   <div class="speakers" aria-label="Keskustelijat">
     {event.speakers.map((speaker, index) => (
       <a href={eventHref} class:list={['speaker', `speaker-${index + 1}`]}>
-        <span class="speaker-placeholder" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+        {speaker.photo ? (
+          <img class="speaker-photo" src={speaker.photo} alt={speaker.name} width="160" height="160" />
+        ) : (
+          <span class="speaker-placeholder" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+        )}
         <strong>{speaker.name}</strong>
       </a>
     ))}
