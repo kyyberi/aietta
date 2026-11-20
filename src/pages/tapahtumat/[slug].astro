@@ -41,17 +41,33 @@ const { event } = Astro.props;
             <p>Tilaisuus on maksuton. Tällä sivulla julkaistaan ilmoittautumislinkki, kun se on avoinna.</p>
           </aside>
         </section>
+        {event.audience && (
+          <section class="audience-section">
+            <div>
+              <p class="event-kicker">Kenelle</p>
+              <h2>Kenelle tilaisuus on tarkoitettu?</h2>
+            </div>
+            <div class="audience-copy">
+              {event.audience.map((paragraph) => <p>{paragraph}</p>)}
+            </div>
+          </section>
+        )}
         <section class="speaker-section">
           <p class="event-kicker">Keskustelijat</p>
           <h2>Kolme näkökulmaa, yksi yhteinen keskustelu.</h2>
           <div class="speaker-detail-grid">
             {event.speakers.map((speaker) => (
               <article class="speaker-detail">
-                <span class="speaker-placeholder large" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+                {speaker.photo ? (
+                  <img class="speaker-detail-photo" src={speaker.photo} alt={speaker.name} width="144" height="144" loading="lazy" decoding="async" />
+                ) : (
+                  <span class="speaker-placeholder large" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+                )}
                 <h3>{speaker.name}</h3>
                 <p class="speaker-title">{speaker.title}</p>
                 <h4>{speaker.topic}</h4>
                 <p>{speaker.description}</p>
+                {speaker.discussionPrompt && <p class="discussion-prompt">{speaker.discussionPrompt}</p>}
               </article>
             ))}
           </div>

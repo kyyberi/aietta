@@ -3,6 +3,7 @@ export type Speaker = {
   title: string;
   topic: string;
   description: string;
+  discussionPrompt?: string;
   photo?: string;
   linkedinUrl?: string;
 };
@@ -22,6 +23,7 @@ export type Event = {
   registrationUrl?: string;
   registrationStatus: 'open' | 'soon' | 'closed';
   highlights?: string[];
+  audience?: string[];
   published: boolean;
 };
 
@@ -40,24 +42,29 @@ export const events: Event[] = [
       {
         name: 'Jarkko Moilanen',
         title: 'AI ETTÄ! -yhteisön perustaja',
-        topic: 'Tuoteajattelusta yhteiseen suuntaan',
-        description: 'Miten teknologinen mahdollisuus muutetaan yhteiseksi, hyödylliseksi muutokseksi.',
+        topic: 'AI-muutos edellyttää siirtymistä projekteista tuotteisiin',
+        description:
+          'Liiketoiminnan tavoitteista johdetaan käyttötapaukset, datatuotteet, yhteiset semanttiset kyvykkyydet ja uudelleenkäytettävät AI-tuotteet.',
+        discussionPrompt: 'Miten omistajuus, rahoitus ja johtaminen muuttuvat?',
         photo: '/images/speakers/jarkko-moilanen.webp',
         linkedinUrl: 'https://www.linkedin.com/in/jarkkomoilanen/',
       },
       {
         name: 'Johannes Hovi',
         title: 'Asiantuntija',
-        topic: 'Ymmärrys ennen ratkaisua',
-        description: 'Miten yhteinen kieli ja konteksti auttavat tekemään parempia valintoja.',
+        topic: 'Semanttinen kerros syntyy yhteistyöstä, ei teknologiasta',
+        description: 'Miten liiketoiminta ja datatiimit rakentavat yhteistä ymmärrystä?',
+        discussionPrompt: 'Miten datatiimien rooli muuttuu palvelupyyntöjen toteuttajasta tuotteiden kehittäjäksi?',
         photo: '/images/speakers/johannes-hovi.webp',
         linkedinUrl: 'https://www.linkedin.com/in/johannes-hovi-010909b/',
       },
       {
         name: 'Katri Harjuveteläinen',
         title: 'Asiantuntija',
-        topic: 'Vastuullinen toteutus',
-        description: 'Miten vastuullisuus pidetään mukana arjen päätöksissä ja toteutuksessa.',
+        topic: 'Vaatimustenmukaisuus osaksi AI-tuotteen elinkaarta',
+        description:
+          'Miten EU:n AI Act, standardit ja eri markkinoiden vaatimukset huomioidaan jo tuotteiden suunnittelussa?',
+        discussionPrompt: 'Miten vältetään jälkikäteen tehtävä vaatimustenmukaisuuden korjaaminen?',
         photo: '/images/speakers/katri-harjuvetelainen.webp',
         linkedinUrl: 'https://www.linkedin.com/in/katriharjuvetelainen/',
       },
@@ -67,6 +74,10 @@ export const events: Event[] = [
       '3 × 10 min alustukset',
       '20 min keskustelu ja yleisökysymykset',
       '5 min yhteenveto',
+    ],
+    audience: [
+      'Tilaisuus on suunnattu suomalaisille liiketoiminnan, digitalisaation, datan ja tekoälyn kehittämisestä vastaaville johtajille ja asiantuntijoille. Erityisesti niille, jotka pohtivat, miten siirrytään yksittäisistä AI-hankkeista jatkuvasti kehitettäviin tuotteisiin, rakennetaan yhteistä ymmärrystä organisaatiorajojen yli ja huomioidaan tekoälyn vaatimustenmukaisuus osana kehittämistä.',
+      'Keskustelussa yhdistyvät liiketoiminnan, tuotejohtamisen, arkkitehtuurin ja AI-hallinnan näkökulmat. Tilaisuus ei edellytä syvällistä teknistä osaamista.',
     ],
     registrationStatus: 'soon',
     published: true,
