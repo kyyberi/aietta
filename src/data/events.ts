@@ -42,7 +42,7 @@ export const events: Event[] = [
         title: 'AI ETTÄ! -yhteisön perustaja',
         topic: 'Tuoteajattelusta yhteiseen suuntaan',
         description: 'Miten teknologinen mahdollisuus muutetaan yhteiseksi, hyödylliseksi muutokseksi.',
-        photo: '/images/speakers/jarkko-moilanen.png',
+        photo: '/images/speakers/jarkko-moilanen.webp',
         linkedinUrl: 'https://www.linkedin.com/in/jarkkomoilanen/',
       },
       {
@@ -50,7 +50,7 @@ export const events: Event[] = [
         title: 'Asiantuntija',
         topic: 'Ymmärrys ennen ratkaisua',
         description: 'Miten yhteinen kieli ja konteksti auttavat tekemään parempia valintoja.',
-        photo: '/images/speakers/johannes-hovi.jpg',
+        photo: '/images/speakers/johannes-hovi.webp',
         linkedinUrl: 'https://www.linkedin.com/in/johannes-hovi-010909b/',
       },
       {
@@ -58,7 +58,7 @@ export const events: Event[] = [
         title: 'Asiantuntija',
         topic: 'Vastuullinen toteutus',
         description: 'Miten vastuullisuus pidetään mukana arjen päätöksissä ja toteutuksessa.',
-        photo: '/images/speakers/katri-harjuvetelainen.png',
+        photo: '/images/speakers/katri-harjuvetelainen.webp',
         linkedinUrl: 'https://www.linkedin.com/in/katriharjuvetelainen/',
       },
     ],

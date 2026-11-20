@@ -52,7 +52,7 @@ const initials = (name: string) => name.split(' ').map((part) => part[0]).join('
             <article class:list={['stage-card', `stage-card-${index + 1}`]}>
               <div class="stage-photo">
                 {person.photo ? (
-                  <img src={person.photo} alt={person.name} width="1399" height="1124" />
+                  <img src={person.photo} alt={person.name} width="800" height="800" loading="lazy" decoding="async" />
                 ) : (
                   <div class="stage-placeholder" aria-label={`${person.name}: kuva tulossa`}>
                     <span>{initials(person.name)}</span>
