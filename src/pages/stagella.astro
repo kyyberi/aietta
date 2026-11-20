@@ -1,0 +1,84 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { events, type Speaker } from '../data/events';
+
+type StagePerson = Speaker & {
+  events: { title: string; slug: string }[];
+};
+
+const peopleByName = new Map<string, StagePerson>();
+
+for (const event of events.filter((event) => event.published)) {
+  for (const speaker of event.speakers) {
+    const person = peopleByName.get(speaker.name);
+    if (person) {
+      person.events.push({ title: event.title, slug: event.slug });
+    } else {
+      peopleByName.set(speaker.name, {
+        ...speaker,
+        events: [{ title: event.title, slug: event.slug }],
+      });
+    }
+  }
+}
+
+const stagePeople = [...peopleByName.values()];
+const initials = (name: string) => name.split(' ').map((part) => part[0]).join('');
+---
+
+<BaseLayout title="Stagella — AI ETTÄ!" description="Tutustu AI ETTÄ! -tapahtumien alustajiin ja heidän näkökulmiinsa.">
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell">
+      <Header currentPath="/stagella/" />
+      <section class="stage-hero" aria-labelledby="stage-title">
+        <p class="eyebrow"><span></span> AI ETTÄ! -YHTEISÖ</p>
+        <h1 id="stage-title">Ihmisiä<br /><em>stagella.</em></h1>
+        <p>AI ETTÄ! -tapahtumat syntyvät erilaisista kokemuksista, näkökulmista ja keskusteluista. Tutustu asiantuntijoihin, jotka tuovat ne yhteiseen pöytään.</p>
+      </section>
+
+      <section class="stage-list" aria-labelledby="stage-list-title">
+        <div class="section-heading">
+          <div>
+            <p class="event-kicker">Alustajat</p>
+            <h2 id="stage-list-title">Seuraavana stagella</h2>
+          </div>
+          <p>Kun uusia tapahtumia ja alustajia lisätään, heidän korttinsa ilmestyvät tänne automaattisesti.</p>
+        </div>
+        <div class="stage-grid">
+          {stagePeople.map((person, index) => (
+            <article class:list={['stage-card', `stage-card-${index + 1}`]}>
+              <div class="stage-photo">
+                {person.photo ? (
+                  <img src={person.photo} alt={person.name} width="1399" height="1124" />
+                ) : (
+                  <div class="stage-placeholder" aria-label={`${person.name}: kuva tulossa`}>
+                    <span>{initials(person.name)}</span>
+                    <small>Kuva tulossa</small>
+                  </div>
+                )}
+              </div>
+              <div class="stage-card-content">
+                <p class="stage-role">{person.title}</p>
+                <h3>{person.name}</h3>
+                <p class="stage-topic">{person.topic}</p>
+                <p class="stage-description">{person.description}</p>
+                <div class="stage-card-footer">
+                  <a class="stage-event" href={`/tapahtumat/${person.events[0].slug}/`}>{person.events[0].title}</a>
+                  {person.linkedinUrl ? (
+                    <a class="linkedin-link" href={person.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn <span aria-hidden="true">↗</span></a>
+                  ) : (
+                    <span class="linkedin-pending">LinkedIn-linkki tulossa</span>
+                  )}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

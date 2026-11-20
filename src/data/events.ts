@@ -39,21 +39,25 @@ export const events: Event[] = [
     speakers: [
       {
         name: 'Jarkko Moilanen',
-        title: 'Asiantuntija',
+        title: 'AI ETTÄ! -yhteisön perustaja',
         topic: 'Tuoteajattelusta yhteiseen suuntaan',
         description: 'Miten teknologinen mahdollisuus muutetaan yhteiseksi, hyödylliseksi muutokseksi.',
+        photo: '/images/speakers/jarkko-moilanen.png',
+        linkedinUrl: 'https://www.linkedin.com/in/jarkkomoilanen/',
       },
       {
         name: 'Johannes Hovi',
         title: 'Asiantuntija',
         topic: 'Ymmärrys ennen ratkaisua',
         description: 'Miten yhteinen kieli ja konteksti auttavat tekemään parempia valintoja.',
+        photo: '/images/speakers/johannes-hovi.jpg',
       },
       {
         name: 'Katri Harjuveteläinen',
         title: 'Asiantuntija',
         topic: 'Vastuullinen toteutus',
         description: 'Miten vastuullisuus pidetään mukana arjen päätöksissä ja toteutuksessa.',
+        photo: '/images/speakers/katri-harjuvetelainen.png',
       },
     ],
     agenda: [

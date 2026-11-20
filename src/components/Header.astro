@@ -9,6 +9,7 @@ const { currentPath = '/' } = Astro.props;
   <nav aria-label="Päänavigaatio">
     <a href="/#tulevat">Tulevat tapahtumat</a>
     <a href="/#menneet">Menneet</a>
+    <a aria-current={currentPath === '/stagella/' ? 'page' : undefined} href="/stagella/">Stagella</a>
     <a aria-current={currentPath === '/mika-ai-etta/' ? 'page' : undefined} href="/mika-ai-etta/">Mikä AI ETTÄ!?</a>
   </nav>
   <details class="mobile-nav">
@@ -16,6 +17,7 @@ const { currentPath = '/' } = Astro.props;
     <nav aria-label="Mobiilinavigaatio">
       <a href="/#tulevat">Tulevat tapahtumat</a>
       <a href="/#menneet">Menneet</a>
+      <a aria-current={currentPath === '/stagella/' ? 'page' : undefined} href="/stagella/">Stagella</a>
       <a aria-current={currentPath === '/mika-ai-etta/' ? 'page' : undefined} href="/mika-ai-etta/">Mikä AI ETTÄ!?</a>
     </nav>
   </details>
