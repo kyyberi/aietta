@@ -51,6 +51,7 @@ export const events: Event[] = [
         topic: 'Ymmärrys ennen ratkaisua',
         description: 'Miten yhteinen kieli ja konteksti auttavat tekemään parempia valintoja.',
         photo: '/images/speakers/johannes-hovi.jpg',
+        linkedinUrl: 'https://www.linkedin.com/in/johannes-hovi-010909b/',
       },
       {
         name: 'Katri Harjuveteläinen',
@@ -58,6 +59,7 @@ export const events: Event[] = [
         topic: 'Vastuullinen toteutus',
         description: 'Miten vastuullisuus pidetään mukana arjen päätöksissä ja toteutuksessa.',
         photo: '/images/speakers/katri-harjuvetelainen.png',
+        linkedinUrl: 'https://www.linkedin.com/in/katriharjuvetelainen/',
       },
     ],
     agenda: [
