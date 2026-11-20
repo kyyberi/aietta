@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import HeroIllustration from '../components/HeroIllustration.astro';
+import EventCard from '../components/EventCard.astro';
+import { events } from '../data/events';
+
+const nextEvent = events.find((event) => event.published);
+---
+
+<BaseLayout title="AI ETTÄ! — Vähemmän kalvoja. Enemmän oivalluksia!">
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell hero-shell">
+      <Header />
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="hero-copy reveal">
+          <p class="eyebrow"><span></span> AVOIN SUOMALAINEN AI-YHTEISÖ</p>
+          <h1 id="hero-title">Vähemmän kalvoja.<br />Enemmän <em>oivalluksia!</em></h1>
+          <p class="intro">Rohkeita kysymyksiä, erilaisia näkökulmia ja ihmisiä, jotka haluavat saada aikaan muutosta.<br />Tule mukaan keskustelemaan datasta ja tekoälystä.</p>
+          <div class="hero-actions">
+            <a class="orange-button" href="#tulevat">Tule mukaan <span aria-hidden="true">↗</span></a>
+            <a class="outline-button" href="/mika-ai-etta/">Mistä on kyse?</a>
+          </div>
+        </div>
+        <HeroIllustration />
+      </section>
+    </div>
+
+    <div class="shell content-shell">
+      {nextEvent && <EventCard event={nextEvent} />}
+      <section class="past-events" id="menneet" aria-labelledby="past-title">
+        <h2 id="past-title">Menneet tapahtumat <span aria-hidden="true">⌁</span></h2>
+        <div class="empty-state">
+          <span aria-hidden="true">✦</span>
+          <p>Ensimmäiset keskustelut ovat vasta edessä. Täältä löydät myöhemmin aiemmat aiheet ja keskusteluhavainnot.</p>
+        </div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

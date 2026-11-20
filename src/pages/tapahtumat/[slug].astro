@@ -1,0 +1,63 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import { events, formatEventDate } from '../../data/events';
+
+export function getStaticPaths() {
+  return events.filter((event) => event.published).map((event) => ({ params: { slug: event.slug }, props: { event } }));
+}
+
+const { event } = Astro.props;
+---
+
+<BaseLayout title={`${event.title} — AI ETTÄ!`} description={event.description}>
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell">
+      <Header />
+      <article class="event-page">
+        <a class="back-link" href="/#tulevat">← Kaikki tapahtumat</a>
+        <p class="eyebrow"><span></span> MAKSUTON ONLINE-KESKUSTELU</p>
+        <h1>{event.title}</h1>
+        <p class="event-lead">{event.subtitle}</p>
+        <div class="event-details">
+          <div><span>Päivä ja aika</span><strong>{formatEventDate(event.startTime)} Suomen aikaa</strong></div>
+          <div><span>Muoto</span><strong>Maksuton online-keskustelu</strong></div>
+          <div><span>Tallenne</span><strong>Tilaisuutta ei tallenneta</strong></div>
+        </div>
+        <section class="event-body-grid">
+          <div>
+            <h2>Mistä keskustellaan?</h2>
+            <p>{event.description}</p>
+            <h2>Ohjelma</h2>
+            <ol class="agenda">
+              {event.agenda.map((item) => <li>{item}</li>)}
+            </ol>
+          </div>
+          <aside class="registration-panel">
+            <p class="event-kicker">Tule mukaan</p>
+            <h2>Ilmoittautuminen avautuu pian.</h2>
+            <p>Tilaisuus on maksuton. Tällä sivulla julkaistaan ilmoittautumislinkki, kun se on avoinna.</p>
+          </aside>
+        </section>
+        <section class="speaker-section">
+          <p class="event-kicker">Keskustelijat</p>
+          <h2>Kolme näkökulmaa, yksi yhteinen keskustelu.</h2>
+          <div class="speaker-detail-grid">
+            {event.speakers.map((speaker) => (
+              <article class="speaker-detail">
+                <span class="speaker-placeholder large" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+                <h3>{speaker.name}</h3>
+                <p class="speaker-title">{speaker.title}</p>
+                <h4>{speaker.topic}</h4>
+                <p>{speaker.description}</p>
+              </article>
+            ))}
+          </div>
+        </section>
+      </article>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

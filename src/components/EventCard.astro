@@ -1,0 +1,33 @@
+---
+import type { Event } from '../data/events';
+
+const { event } = Astro.props as { event: Event };
+const eventHref = `/tapahtumat/${event.slug}/`;
+---
+
+<article class="event-card" id="tulevat">
+  <div class="event-copy">
+    <span class="event-kicker">SEURAAVA TAPAHTUMA</span>
+    <h2><a href={eventHref}>{event.title}</a></h2>
+    <p class="event-subtitle">{event.subtitle}</p>
+    <div class="event-meta">
+      <span><b aria-hidden="true">▣</b> To 10.12.2026 klo 11–12</span>
+      <span><b aria-hidden="true">▱</b> Maksuton online-keskustelu</span>
+    </div>
+  </div>
+  <div class="speakers" aria-label="Keskustelijat">
+    {event.speakers.map((speaker, index) => (
+      <a href={eventHref} class:list={['speaker', `speaker-${index + 1}`]}>
+        <span class="speaker-placeholder" aria-hidden="true">{speaker.name.split(' ').map((part) => part[0]).join('')}</span>
+        <strong>{speaker.name}</strong>
+      </a>
+    ))}
+  </div>
+  <div class="event-action">
+    {event.registrationStatus === 'open' && event.registrationUrl ? (
+      <a class="orange-button" href={event.registrationUrl} target="_blank" rel="noreferrer">Ilmoittaudu <span aria-hidden="true">↗</span></a>
+    ) : (
+      <span class="registration-soon">Ilmoittautuminen<br />avautuu pian</span>
+    )}
+  </div>
+</article>

@@ -1,0 +1,43 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<BaseLayout title="Mikä AI ETTÄ!? — AI ETTÄ!">
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell">
+      <Header currentPath="/mika-ai-etta/" />
+      <section class="about-hero">
+        <p class="eyebrow"><span></span> AVOIN SUOMALAINEN AI-YHTEISÖ</p>
+        <h1>Ajatuksia, jotka<br /><em>pääsevät liikkeelle.</em></h1>
+        <p>AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö, jossa asiantuntijat, johtajat ja muutoksesta kiinnostuneet ihmiset kohtaavat.</p>
+      </section>
+      <section class="about-grid" aria-label="AI ETTÄ! -yhteisöstä">
+        <div>
+          <h2>Ei kalvosulkeisia.<br />Vaan keskustelua.</h2>
+          <p>Tavoitteena on jakaa kokemuksia, haastaa totuttuja ajattelumalleja ja saada aikaan keskustelua, joka auttaa viemään uusia ajatuksia käytäntöön.</p>
+          <a class="orange-button" href="/#tulevat">Katso seuraava tapahtuma <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="topic-card">
+          <p class="event-kicker">Keskusteluissa käsitellään</p>
+          <ul>
+            <li>Liiketoimintalähtöistä AI-muutosta</li>
+            <li>Data- ja AI-tuotteita</li>
+            <li>Semantiikkaa ja yhteentoimivuutta</li>
+            <li>Tuotejohtamista</li>
+            <li>AI:n vastuullista käyttöönottoa</li>
+            <li>Organisaatioiden toimintamallien muutosta</li>
+          </ul>
+        </div>
+      </section>
+      <section class="principles">
+        <div><span>01</span><h3>Avoin</h3><p>Tilaisuudet ovat maksuttomia ja kaikille aiheesta kiinnostuneille.</p></div>
+        <div><span>02</span><h3>Käytännöllinen</h3><p>Jaamme kokemuksia, emme valmiiksi paketoituja vastauksia.</p></div>
+        <div><span>03</span><h3>Riippumaton</h3><p>Yhteisö on itsenäinen asiantuntija-aloite.</p></div>
+      </section>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
