@@ -21,6 +21,7 @@ export type Event = {
   agenda: string[];
   eventImage?: string;
   registrationUrl?: string;
+  registrationFormId?: string;
   registrationStatus: 'open' | 'soon' | 'closed';
   highlights?: string[];
   audience?: string[];
@@ -79,7 +80,8 @@ export const events: Event[] = [
       'Tilaisuus on suunnattu suomalaisille liiketoiminnan, digitalisaation, datan ja tekoälyn kehittämisestä vastaaville johtajille ja asiantuntijoille. Erityisesti niille, jotka pohtivat, miten siirrytään yksittäisistä AI-hankkeista jatkuvasti kehitettäviin tuotteisiin, rakennetaan yhteistä ymmärrystä organisaatiorajojen yli ja huomioidaan tekoälyn vaatimustenmukaisuus osana kehittämistä.',
       'Keskustelussa yhdistyvät liiketoiminnan, tuotejohtamisen, arkkitehtuurin ja AI-hallinnan näkökulmat. Tilaisuus ei edellytä syvällistä teknistä osaamista.',
     ],
-    registrationStatus: 'soon',
+    registrationFormId: 'LYjR3h',
+    registrationStatus: 'open',
     published: true,
   },
 ];

@@ -35,11 +35,18 @@ const { event } = Astro.props;
               {event.agenda.map((item) => <li>{item}</li>)}
             </ol>
           </div>
-          <aside class="registration-panel">
-            <p class="event-kicker">Tule mukaan</p>
-            <h2>Ilmoittautuminen avautuu pian.</h2>
-            <p>Tilaisuus on maksuton. Tällä sivulla julkaistaan ilmoittautumislinkki, kun se on avoinna.</p>
-          </aside>
+          {event.registrationStatus === 'open' && event.registrationFormId ? (
+            <aside class="registration-panel registration-open" id="ilmoittaudu">
+              <p class="event-kicker">Tule mukaan</p>
+              <div class="ml-embedded" data-form={event.registrationFormId}></div>
+            </aside>
+          ) : (
+            <aside class="registration-panel" id="ilmoittaudu">
+              <p class="event-kicker">Tule mukaan</p>
+              <h2>Ilmoittautuminen avautuu pian.</h2>
+              <p>Tilaisuus on maksuton. Tällä sivulla julkaistaan ilmoittautumislinkki, kun se on avoinna.</p>
+            </aside>
+          )}
         </section>
         {event.audience && (
           <section class="audience-section">
