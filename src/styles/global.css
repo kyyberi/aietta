@@ -48,7 +48,6 @@ em { color: var(--orange); font-style: normal; }
 .hero-illustration::before, .hero-illustration::after { content: ''; position: absolute; border-radius: 50%; border: 7px solid var(--orange); z-index: -1; }
 .hero-illustration::before { width: 120%; height: 58%; left: -9%; bottom: -36%; border-top-color: transparent; transform: rotate(-6deg); }
 .hero-illustration::after { width: 15px; height: 15px; left: 8%; top: 42%; border: 0; background: var(--orange); box-shadow: 22px -14px 0 -3px var(--orange), 40px 8px 0 -4px var(--orange); }
-.hero-illustration p { position: absolute; bottom: 28px; left: 0; right: 0; z-index: 2; text-align: center; color: var(--orange); font-family: var(--display); font-size: clamp(1.05rem, 2vw, 1.5rem); font-weight: 900; margin: 0; text-shadow: 0 1px 0 var(--paper); }
 
 .content-shell { padding-top: .7rem; padding-bottom: 5rem; }
 .event-card { display: grid; grid-template-columns: minmax(270px, 1.2fr) minmax(265px, .9fr) minmax(160px, .45fr); align-items: center; gap: clamp(1rem, 2vw, 2.4rem); position: relative; min-height: 272px; padding: 2rem 2.5rem; border: 1.5px solid var(--orange); border-radius: 25px; background: radial-gradient(circle at 96% 8%, #ffd98c 0 8%, transparent 8.1%), radial-gradient(circle at 89% 106%, #ffdaa1 0 20%, transparent 20.1%), #fff7e9; overflow: hidden; transition: transform .25s ease, box-shadow .25s ease; }
