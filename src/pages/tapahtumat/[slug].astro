@@ -9,9 +9,37 @@ export function getStaticPaths() {
 }
 
 const { event } = Astro.props;
+const eventUrl = new URL(`/tapahtumat/${event.slug}/`, Astro.site ?? 'https://aietta.net').href;
+const eventSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Event',
+  name: event.title,
+  description: event.description,
+  startDate: event.startTime,
+  endDate: event.endTime,
+  eventAttendanceMode: 'https://schema.org/OnlineEventAttendanceMode',
+  eventStatus: 'https://schema.org/EventScheduled',
+  location: {
+    '@type': 'VirtualLocation',
+    url: eventUrl,
+  },
+  organizer: {
+    '@type': 'Organization',
+    name: 'AI ETTÄ!',
+    url: 'https://aietta.net/',
+  },
+  offers: {
+    '@type': 'Offer',
+    url: eventUrl,
+    price: '0',
+    priceCurrency: 'EUR',
+    availability: 'https://schema.org/InStock',
+  },
+};
 ---
 
 <BaseLayout title={`${event.title} — AI ETTÄ!`} description={event.description}>
+  <script type="application/ld+json" set:html={JSON.stringify(eventSchema)}></script>
   <main>
     <div class="top-shape" aria-hidden="true"></div>
     <div class="shell">

@@ -4,9 +4,25 @@ import '../styles/global.css';
 interface Props {
   title: string;
   description?: string;
+  image?: string;
 }
 
-const { title, description = 'AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö.' } = Astro.props;
+const {
+  title,
+  description = 'AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö.',
+  image = '/images/og.png',
+} = Astro.props;
+const siteUrl = Astro.site ?? new URL('https://aietta.net');
+const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
+const socialImageUrl = new URL(image, siteUrl).href;
+const organizationSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Organization',
+  name: 'AI ETTÄ!',
+  url: siteUrl.href,
+  logo: new URL('/images/ai-etta-logo.webp', siteUrl).href,
+  description: 'Avoin suomalainen data- ja tekoäly-yhteisö.',
+};
 ---
 
 <!doctype html>
@@ -15,10 +31,24 @@ const { title, description = 'AI ETTÄ! on avoin suomalainen data- ja tekoäly-y
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="fi_FI" />
+    <meta property="og:site_name" content="AI ETTÄ!" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:image" content={socialImageUrl} />
+    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="AI ETTÄ! – Ideoista vaikuttaviin AI-ratkaisuihin" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={socialImageUrl} />
+    <meta name="twitter:image:alt" content="AI ETTÄ! – Ideoista vaikuttaviin AI-ratkaisuihin" />
+    <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
     <title>{title}</title>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KTPG23SP"></script>
     <script is:inline>

@@ -1,0 +1,23 @@
+# AI ETTÄ!
+
+> AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö. Yhteisö järjestää maksuttomia online-keskusteluja, joissa yhdistyvät liiketoiminnan, tuotejohtamisen, datan, arkkitehtuurin ja AI-hallinnan näkökulmat.
+
+## Ensisijaiset sivut
+
+- [Etusivu](https://aietta.net/): Yhteisön tarkoitus, seuraava tapahtuma ja postituslista.
+- [Mikä AI ETTÄ!?](https://aietta.net/mika-ai-etta/): Yhteisön tausta, toimintaperiaatteet ja perustaja.
+- [Stagella](https://aietta.net/stagella/): Tapahtumissa alustaneet ihmiset, heidän aiheet ja LinkedIn-profiilit.
+
+## Nykyinen tapahtuma
+
+- [AI tarvitsee muutakin kuin teknologiaa](https://aietta.net/tapahtumat/ai-tarvitsee-muutakin-kuin-teknologiaa/): Maksuton online-keskustelu 10.12.2026 klo 11–12 Suomen aikaa. Aiheina ovat siirtyminen AI-projekteista tuotteisiin, yhteinen semanttinen ymmärrys ja AI-tuotteiden vaatimustenmukaisuus.
+
+## Yhteisön periaatteet
+
+- Avoin: tilaisuudet ovat maksuttomia ja avoimia aiheesta kiinnostuneille.
+- Käytännöllinen: yhteisö jakaa kokemuksia ja keskustelee toteutuksista.
+- Riippumaton: yhteisö on itsenäinen asiantuntija-aloite.
+
+## Yhteydenotto
+
+- Aihe-ehdotukset: hello@aietta.net
