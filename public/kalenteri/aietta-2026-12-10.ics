@@ -1,0 +1,26 @@
+BEGIN:VCALENDAR
+PRODID:-//AI ETTÄ!//Tapahtumat//FI
+VERSION:2.0
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:AI ETTÄ! -tapahtuma
+BEGIN:VEVENT
+UID:aietta-20261210-ai-tarvitsee-muutakin-kuin-teknologiaa@aietta.net
+DTSTAMP:20261121T080000Z
+DTSTART:20261210T090000Z
+DTEND:20261210T100000Z
+SUMMARY:AI tarvitsee muutakin kuin teknologiaa | AI ETTÄ!
+DESCRIPTION:Kolme asiantuntija-alustusta ja yhteinen keskustelu.\nJarkko Mo
+ ilanen: AI-muutos edellyttää siirtymistä projekteista tuotteisiin.\nJoh
+ annes Hovi: Semanttinen kerros syntyy yhteistyöstä, ei teknologiasta.\nK
+ atri Harjuveteläinen: Vaatimustenmukaisuus osaksi AI-tuotteen elinkaarta.
+ \nMaksuton online-tilaisuus. Ei tallennetta.\nOsallistumislinkki lähetet
+ ään ilmoittautuneille sähköpostitse ennen tilaisuutta.\nLisätiedot: h
+ ttps://aietta.net
+LOCATION:Online (osallistumislinkki lähetetään sähköpostitse)
+URL:https://aietta.net
+STATUS:CONFIRMED
+TRANSP:OPAQUE
+SEQUENCE:0
+END:VEVENT
+END:VCALENDAR

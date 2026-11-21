@@ -11,11 +11,13 @@ interface Props {
       type: InsightType;
       authorId: string;
       publishedAt: Date;
+      listingImage?: string;
     };
   };
+  showListingImage?: boolean;
 }
 
-const { insight } = Astro.props;
+const { insight, showListingImage = false } = Astro.props;
 const author = getAuthor(insight.data.authorId);
 
 if (!author) {
@@ -24,6 +26,9 @@ if (!author) {
 ---
 
 <article class="insight-card">
+  {showListingImage && insight.data.listingImage && (
+    <img class="insight-card-image" src={insight.data.listingImage} alt="" width="1672" height="941" loading="lazy" decoding="async" />
+  )}
   <div class="insight-card-content">
     <p class="insight-type">{insightTypeLabels[insight.data.type]}</p>
     <h2><a href={`/oivallukset/${insight.data.slug}/`}>{insight.data.title}</a></h2>

@@ -5,6 +5,7 @@ export type Author = {
   bio: string;
   photo: string;
   linkedinUrl?: string;
+  websiteUrl?: string;
 };
 
 export const authors: Author[] = [
@@ -15,6 +16,7 @@ export const authors: Author[] = [
     bio: 'Jarkko työskentelee datan, tekoälyn ja tuoteajattelun risteyksessä. Hän kokoaa yhteisöön ihmisiä, jotka haluavat viedä keskustelun teknologiasta kohti ihmisiä, käytäntöä ja todellista muutosta.',
     photo: '/images/speakers/jarkko-moilanen.webp',
     linkedinUrl: 'https://www.linkedin.com/in/jarkkomoilanen/',
+    websiteUrl: 'https://jarkkomoilanen.com/',
   },
   {
     id: 'johannes-hovi',

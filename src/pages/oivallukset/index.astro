@@ -29,8 +29,11 @@ if (featuredInsight && !featuredAuthor) {
       </section>
 
       {featuredInsight && featuredAuthor ? (
-        <section class="featured-insight" aria-labelledby="featured-insight-title">
+        <section class:list={['featured-insight', { 'has-listing-image': Boolean(featuredInsight.data.listingImage) }]} aria-labelledby="featured-insight-title">
           <div class="featured-insight-copy">
+            {featuredInsight.data.listingImage && (
+              <img class="featured-insight-image" src={featuredInsight.data.listingImage} alt="Kuvitus: AI-yhteisö keskustelee pöydän ääressä" width="1672" height="941" decoding="async" />
+            )}
             <div class="featured-insight-main">
               <p class="insight-type">Nostettu · {insightTypeLabels[featuredInsight.data.type]}</p>
               <h2 id="featured-insight-title"><a href={`/oivallukset/${featuredInsight.data.slug}/`}>{featuredInsight.data.title}</a></h2>
@@ -71,7 +74,7 @@ if (featuredInsight && !featuredAuthor) {
           <div class="insight-grid" data-insight-grid>
             {remainingInsights.map((insight) => (
               <div data-insight-card data-insight-type={insight.data.type}>
-                <InsightCard insight={insight} />
+                <InsightCard insight={insight} showListingImage />
               </div>
             ))}
           </div>

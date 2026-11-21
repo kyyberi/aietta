@@ -45,7 +45,9 @@ const articleSchema = {
   author: {
     '@type': 'Person',
     name: author.name,
-    ...(author.linkedinUrl ? { sameAs: author.linkedinUrl } : {}),
+    ...((author.linkedinUrl || author.websiteUrl)
+      ? { sameAs: [author.linkedinUrl, author.websiteUrl].filter((url): url is string => Boolean(url)) }
+      : {}),
   },
   publisher: {
     '@type': 'Organization',
@@ -77,7 +79,12 @@ const articleSchema = {
               <p class="article-author-label">Kirjoittaja</p>
               <h2>{author.name}</h2>
               <p>{author.bio}</p>
-              {author.linkedinUrl && <a class="text-link" href={author.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn-profiili</a>}
+              {(author.linkedinUrl || author.websiteUrl) && (
+                <div class="article-author-links">
+                  {author.linkedinUrl && <a class="text-link" href={author.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn-profiili</a>}
+                  {author.websiteUrl && <a class="text-link" href={author.websiteUrl} target="_blank" rel="noreferrer">Jarkkomoilanen.com</a>}
+                </div>
+              )}
             </div>
           </div>
         </header>
