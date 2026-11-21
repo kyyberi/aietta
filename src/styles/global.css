@@ -17,6 +17,7 @@ button, a { -webkit-tap-highlight-color: transparent; }
 
 .shell { width: min(100% - 3.5rem, 1370px); margin-inline: auto; position: relative; }
 .home-hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: linear-gradient(116deg, #fffdf9 0%, #fff1dc 100%); }.home-hero .top-shape { z-index: 0; }.home-hero .hero-shell { z-index: 1; }
+.about-page-hero { position: relative; isolation: isolate; overflow: hidden; border-bottom: 1px solid var(--line); background: linear-gradient(116deg, #fffdf9 0%, #fff1dc 100%); }.about-page-hero .top-shape { z-index: 0; }.about-page-hero .shell { z-index: 1; }.about-content { padding-top: clamp(3rem, 5vw, 5rem); }
 .top-shape { position: absolute; right: 0; top: 0; width: min(24vw, 360px); height: 148px; border-radius: 0 0 0 180px; background: var(--orange); }
 .site-header { min-height: 112px; display: flex; align-items: center; gap: clamp(1rem, 3vw, 4.5rem); position: relative; z-index: 2; }
 .brand { display: block; width: 178px; flex: 0 0 auto; }
