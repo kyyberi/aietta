@@ -15,21 +15,23 @@ const latestInsights = sortInsightsByDate(await getCollection('oivallukset', ({ 
 
 <BaseLayout title="AI ETTÄ! — Ideoista vaikuttaviin AI-ratkaisuihin" description="AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö. Tule mukaan maksuttomiin keskusteluihin datasta, tekoälystä ja vaikuttavista AI-ratkaisuista.">
   <main>
-    <div class="top-shape" aria-hidden="true"></div>
-    <div class="shell hero-shell">
-      <Header />
-      <section class="hero" aria-labelledby="hero-title">
-        <div class="hero-copy reveal">
-          <p class="eyebrow"><span></span> AVOIN SUOMALAINEN AI-YHTEISÖ</p>
-          <h1 id="hero-title">Ideoista vaikuttaviin<br /><em>AI-ratkaisuihin</em></h1>
-          <p class="intro">Rohkeita kysymyksiä, erilaisia näkökulmia ja ihmisiä, jotka haluavat saada aikaan muutosta. Tule mukaan keskustelemaan datasta ja tekoälystä.</p>
-          <div class="hero-actions">
-            <a class="orange-button" href="#tulevat">Tule mukaan <span aria-hidden="true">↗</span></a>
-            <a class="outline-button" href="/mika-ai-etta/">Mistä on kyse?</a>
+    <div class="home-hero">
+      <div class="top-shape" aria-hidden="true"></div>
+      <div class="shell hero-shell">
+        <Header />
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-copy reveal">
+            <p class="eyebrow"><span></span> AVOIN SUOMALAINEN AI-YHTEISÖ</p>
+            <h1 id="hero-title">Ideoista vaikuttaviin<br /><em>AI-ratkaisuihin</em></h1>
+            <p class="intro">Rohkeita kysymyksiä, erilaisia näkökulmia ja ihmisiä, jotka haluavat saada aikaan muutosta. Tule mukaan keskustelemaan datasta ja tekoälystä.</p>
+            <div class="hero-actions">
+              <a class="orange-button" href="#tulevat">Tule mukaan <span aria-hidden="true">↗</span></a>
+              <a class="outline-button" href="/mika-ai-etta/">Mistä on kyse?</a>
+            </div>
           </div>
-        </div>
-        <HeroIllustration />
-      </section>
+          <HeroIllustration />
+        </section>
+      </div>
     </div>
 
     <div class="shell content-shell">
