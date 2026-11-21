@@ -6,7 +6,7 @@ type: expert-article
 authorId: johannes-hovi
 publishedAt: 2026-11-21
 updatedAt: 2026-11-21
-coverImage: /images/og.png
+coverImage: /images/ai-meaning-in-motion.webp
 tags:
   - semanttinen kerros
   - data

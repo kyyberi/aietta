@@ -11,7 +11,6 @@ interface Props {
       type: InsightType;
       authorId: string;
       publishedAt: Date;
-      coverImage: string;
     };
   };
 }
@@ -25,9 +24,6 @@ if (!author) {
 ---
 
 <article class="insight-card">
-  <a class="insight-card-image" href={`/oivallukset/${insight.data.slug}/`} aria-label={`Lue: ${insight.data.title}`}>
-    <img src={insight.data.coverImage} alt="" width="1200" height="675" loading="lazy" decoding="async" />
-  </a>
   <div class="insight-card-content">
     <p class="insight-type">{insightTypeLabels[insight.data.type]}</p>
     <h2><a href={`/oivallukset/${insight.data.slug}/`}>{insight.data.title}</a></h2>
