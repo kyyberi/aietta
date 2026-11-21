@@ -69,3 +69,11 @@ Semanttinen kerros ei siis ole pelkkä tekninen komponentti tai kertaluonteinen 
 **Tekoäly ei poista tarvetta sopia, mitä data tarkoittaa. Se tekee siitä entistä tärkeämpää.**
 
 *Johannes Hovi, Ari Hovi / Hovi Competence Development Oy*
+
+---
+
+**AI ETTÄ! · 10.12.2026**
+
+Johannes jatkaa aiheesta ensimmäisessä AI ETTÄ! -keskustelussa.
+
+[Tutustu tapahtumaan](/tapahtumat/ai-tarvitsee-muutakin-kuin-teknologiaa/)
