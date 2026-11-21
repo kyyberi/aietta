@@ -64,9 +64,11 @@ const articleSchema = {
       <article class="article-page">
         <a class="back-link" href="/oivallukset/">← Kaikki oivallukset</a>
         <header class="article-header">
-          <p class="insight-type">{insightTypeLabels[insight.data.type]} · {formatInsightDate(insight.data.publishedAt)}</p>
-          <h1>{insight.data.title}</h1>
-          <p class="article-lead">{insight.data.description}</p>
+          <div class="article-title-block">
+            <p class="insight-type">{insightTypeLabels[insight.data.type]} · {formatInsightDate(insight.data.publishedAt)}</p>
+            <h1>{insight.data.title}</h1>
+            <p class="article-lead">{insight.data.description}</p>
+          </div>
           <div class="article-author">
             <img src={author.photo} alt={author.name} width="160" height="160" decoding="async" />
             <div>
