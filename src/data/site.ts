@@ -1,1 +1,1 @@
-export const assetVersion = '2026.11.21.5';
+export const assetVersion = '2026.11.21.7';
