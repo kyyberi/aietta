@@ -58,10 +58,12 @@ const articleSchema = {
 <BaseLayout title={`${insight.data.title} — AI ETTÄ!`} description={insight.data.description} image={insight.data.coverImage} pageType="article" publishedTime={insight.data.publishedAt} modifiedTime={insight.data.updatedAt} authorName={author.name}>
   <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
   <main>
-    <div class="top-shape" aria-hidden="true"></div>
-    <div class="shell">
-      <Header currentPath="/oivallukset/" />
-      <article class="article-page">
+    <article class="article-page">
+      <section class="article-hero">
+        <div class="top-shape" aria-hidden="true"></div>
+        <div class="shell">
+          <Header currentPath="/oivallukset/" />
+          <div class="article-hero-content">
         <a class="back-link" href="/oivallukset/">← Kaikki oivallukset</a>
         <header class="article-header">
           <div class="article-title-block">
@@ -79,7 +81,11 @@ const articleSchema = {
             </div>
           </div>
         </header>
+          </div>
+        </div>
+      </section>
 
+      <div class="shell article-content">
         <div class="article-layout">
           <div class="article-prose">
             <Content />
@@ -112,8 +118,8 @@ const articleSchema = {
             </div>
           </section>
         )}
-      </article>
-    </div>
+      </div>
+    </article>
   </main>
   <Footer />
 </BaseLayout>
