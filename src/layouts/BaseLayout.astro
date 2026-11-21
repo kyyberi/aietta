@@ -1,5 +1,6 @@
 ---
-import '../styles/global.css';
+import globalStylesheet from '../styles/global.css?url';
+import { assetVersion } from '../data/site';
 
 interface Props {
   title: string;
@@ -24,6 +25,7 @@ const siteUrl = Astro.site ?? new URL('https://aietta.net');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const socialImageUrl = new URL(image, siteUrl).href;
 const socialImageType = image.endsWith('.webp') ? 'image/webp' : image.endsWith('.jpg') || image.endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
+const versionedStylesheet = `${globalStylesheet}${globalStylesheet.includes('?') ? '&' : '?'}v=${assetVersion}`;
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -41,6 +43,7 @@ const organizationSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href={versionedStylesheet} />
     <meta name="description" content={description} />
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
@@ -64,6 +67,7 @@ const organizationSchema = {
     {pageType === 'article' && authorName && <meta property="article:author" content={authorName} />}
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
     <title>{title}</title>
+    <script defer src={`/site.js?v=${assetVersion}`}></script>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KTPG23SP"></script>
     <script is:inline>
       window.dataLayer = window.dataLayer || [];
