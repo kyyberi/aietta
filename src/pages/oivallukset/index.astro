@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import { getAuthor } from '../../data/authors';
+import { formatInsightDate, insightTypeLabels, sortInsightsByDate } from '../../data/insights';
+
+const insights = sortInsightsByDate(await getCollection('oivallukset', ({ data }) => !data.draft));
+const featuredInsight = insights[0];
+const remainingInsights = insights.slice(1);
+const featuredAuthor = featuredInsight ? getAuthor(featuredInsight.data.authorId) : undefined;
+
+if (featuredInsight && !featuredAuthor) {
+  throw new Error(`Unknown insight author: ${featuredInsight.data.authorId}`);
+}
+---
+
+<BaseLayout title="Oivallukset — AI ETTÄ!" description="AI ETTÄ! -yhteisön tapahtumien oivalluksia, asiantuntijakirjoituksia ja keskustelunavauksia.">
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell">
+      <Header currentPath="/oivallukset/" />
+      <section class="insights-hero" aria-labelledby="insights-title">
+        <p class="eyebrow"><span></span> OIVALLUKSET</p>
+        <h1 id="insights-title">Ajatukset eivät jää <em>tapahtumaan.</em></h1>
+        <p>AI ETTÄ! -yhteisön keskusteluista ja asiantuntijoilta syntyy ajatuksia, joita voi jatkaa omassa työssä, tiimeissä ja päätöksissä.</p>
+      </section>
+
+      {featuredInsight && featuredAuthor ? (
+        <section class="featured-insight" aria-labelledby="featured-insight-title">
+          <a class="featured-insight-image" href={`/oivallukset/${featuredInsight.data.slug}/`} aria-label={`Lue: ${featuredInsight.data.title}`}>
+            <img src={featuredInsight.data.coverImage} alt="" width="1200" height="675" fetchpriority="high" decoding="async" />
+          </a>
+          <div class="featured-insight-copy">
+            <p class="insight-type">Nostettu · {insightTypeLabels[featuredInsight.data.type]}</p>
+            <h2 id="featured-insight-title"><a href={`/oivallukset/${featuredInsight.data.slug}/`}>{featuredInsight.data.title}</a></h2>
+            <p>{featuredInsight.data.description}</p>
+            <div class="insight-byline">
+              <img src={featuredAuthor.photo} alt="" width="96" height="96" decoding="async" />
+              <p><strong>{featuredAuthor.name}</strong><span>{formatInsightDate(featuredInsight.data.publishedAt)}</span></p>
+            </div>
+            <a class="text-link" href={`/oivallukset/${featuredInsight.data.slug}/`}>Lue kirjoitus</a>
+          </div>
+        </section>
+      ) : (
+        <section class="insight-empty" aria-labelledby="insight-empty-title">
+          <p class="insight-type">TOIMITUS VALMISTELEE</p>
+          <h2 id="insight-empty-title">Ensimmäiset oivallukset ovat tulossa.</h2>
+          <p>Julkaisemme kirjoituksia, kun ne ovat kirjoittajan ja järjestäjän hyväksymiä.</p>
+        </section>
+      )}
+
+      {remainingInsights.length > 0 && (
+        <section class="insight-archive" aria-labelledby="archive-title">
+          <div class="insight-archive-heading">
+            <div>
+              <p class="eyebrow"><span></span> KAIKKI JULKAISUT</p>
+              <h2 id="archive-title">Jatka ajatusta.</h2>
+            </div>
+            <div class="insight-filters" aria-label="Suodata julkaisuja">
+              <button type="button" class="is-active" aria-pressed="true" data-insight-filter="all">Kaikki</button>
+              <button type="button" aria-pressed="false" data-insight-filter="event-insights">Tapahtumien oivallukset</button>
+              <button type="button" aria-pressed="false" data-insight-filter="expert-article">Asiantuntijakirjoitukset</button>
+              <button type="button" aria-pressed="false" data-insight-filter="discussion">Keskustelunavaukset</button>
+            </div>
+          </div>
+          <div class="insight-grid" data-insight-grid>
+            {remainingInsights.map((insight) => (
+              <div data-insight-card data-insight-type={insight.data.type}>
+                <InsightCard insight={insight} />
+              </div>
+            ))}
+          </div>
+        </section>
+      )}
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<script is:inline>
+  const filterButtons = document.querySelectorAll('[data-insight-filter]');
+  const insightCards = document.querySelectorAll('[data-insight-card]');
+
+  filterButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const selectedType = button.dataset.insightFilter;
+
+      filterButtons.forEach((candidate) => {
+        const isActive = candidate === button;
+        candidate.classList.toggle('is-active', isActive);
+        candidate.setAttribute('aria-pressed', String(isActive));
+      });
+
+      insightCards.forEach((card) => {
+        const isVisible = selectedType === 'all' || card.dataset.insightType === selectedType;
+        card.hidden = !isVisible;
+      });
+    });
+  });
+</script>

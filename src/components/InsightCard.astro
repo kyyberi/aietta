@@ -1,0 +1,40 @@
+---
+import { getAuthor } from '../data/authors';
+import { formatInsightDate, insightTypeLabels, type InsightType } from '../data/insights';
+
+interface Props {
+  insight: {
+    data: {
+      slug: string;
+      title: string;
+      description: string;
+      type: InsightType;
+      authorId: string;
+      publishedAt: Date;
+      coverImage: string;
+    };
+  };
+}
+
+const { insight } = Astro.props;
+const author = getAuthor(insight.data.authorId);
+
+if (!author) {
+  throw new Error(`Unknown insight author: ${insight.data.authorId}`);
+}
+---
+
+<article class="insight-card">
+  <a class="insight-card-image" href={`/oivallukset/${insight.data.slug}/`} aria-label={`Lue: ${insight.data.title}`}>
+    <img src={insight.data.coverImage} alt="" width="1200" height="675" loading="lazy" decoding="async" />
+  </a>
+  <div class="insight-card-content">
+    <p class="insight-type">{insightTypeLabels[insight.data.type]}</p>
+    <h2><a href={`/oivallukset/${insight.data.slug}/`}>{insight.data.title}</a></h2>
+    <p class="insight-description">{insight.data.description}</p>
+    <div class="insight-byline">
+      <img src={author.photo} alt="" width="96" height="96" loading="lazy" decoding="async" />
+      <p><strong>{author.name}</strong><span>{formatInsightDate(insight.data.publishedAt)}</span></p>
+    </div>
+  </div>
+</article>

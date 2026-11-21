@@ -1,8 +1,11 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import InsightCard from '../../components/InsightCard.astro';
 import { events, formatEventDate } from '../../data/events';
+import { sortInsightsByDate } from '../../data/insights';
 
 export function getStaticPaths() {
   return events.filter((event) => event.published).map((event) => ({ params: { slug: event.slug }, props: { event } }));
@@ -10,6 +13,9 @@ export function getStaticPaths() {
 
 const { event } = Astro.props;
 const eventUrl = new URL(`/tapahtumat/${event.slug}/`, Astro.site ?? 'https://aietta.net').href;
+const relatedInsights = sortInsightsByDate(
+  (await getCollection('oivallukset', ({ data }) => !data.draft)).filter((insight) => insight.data.relatedEventId === event.id),
+);
 const eventSchema = {
   '@context': 'https://schema.org',
   '@type': 'Event',
@@ -43,7 +49,7 @@ const eventSchema = {
   <main>
     <div class="top-shape" aria-hidden="true"></div>
     <div class="shell">
-      <Header />
+      <Header currentPath="/tapahtumat/" />
       <article class="event-page">
         <a class="back-link" href="/#tulevat">← Kaikki tapahtumat</a>
         <p class="eyebrow"><span></span> MAKSUTON ONLINE-KESKUSTELU</p>
@@ -107,6 +113,17 @@ const eventSchema = {
             ))}
           </div>
         </section>
+        {relatedInsights.length > 0 && (
+          <section class="related-insights event-insights" aria-labelledby="event-insights-title">
+            <div>
+              <p class="eyebrow"><span></span> OIVALLUKSET</p>
+              <h2 id="event-insights-title">Tapahtuman oivallukset</h2>
+            </div>
+            <div class="insight-grid">
+              {relatedInsights.map((insight) => <InsightCard insight={insight} />)}
+            </div>
+          </section>
+        )}
       </article>
     </div>
   </main>

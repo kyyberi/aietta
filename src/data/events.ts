@@ -86,6 +86,8 @@ export const events: Event[] = [
   },
 ];
 
+export const getEventById = (id: string | null) => events.find((event) => event.id === id && event.published);
+
 export const formatEventDate = (startTime: string) =>
   new Intl.DateTimeFormat('fi-FI', {
     weekday: 'long',

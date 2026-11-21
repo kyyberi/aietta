@@ -1,0 +1,119 @@
+---
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Footer from '../../components/Footer.astro';
+import Header from '../../components/Header.astro';
+import InsightCard from '../../components/InsightCard.astro';
+import { getAuthor } from '../../data/authors';
+import { getEventById } from '../../data/events';
+import { formatInsightDate, insightTypeLabels, sortInsightsByDate } from '../../data/insights';
+
+export async function getStaticPaths() {
+  const insights = sortInsightsByDate(await getCollection('oivallukset', ({ data }) => !data.draft));
+
+  return insights.map((insight) => ({
+    params: { slug: insight.data.slug },
+    props: { insight },
+  }));
+}
+
+const { insight } = Astro.props as { insight: CollectionEntry<'oivallukset'> };
+const author = getAuthor(insight.data.authorId);
+const relatedEvent = getEventById(insight.data.relatedEventId);
+const allInsights = sortInsightsByDate(await getCollection('oivallukset', ({ data }) => !data.draft));
+const relatedInsights = allInsights
+  .filter((candidate) => candidate.data.slug !== insight.data.slug && candidate.data.tags.some((tag) => insight.data.tags.includes(tag)))
+  .slice(0, 3);
+const { Content } = await render(insight);
+const articleUrl = new URL(`/oivallukset/${insight.data.slug}/`, Astro.site ?? 'https://aietta.net').href;
+const shareUrl = encodeURIComponent(articleUrl);
+const shareTitle = encodeURIComponent(insight.data.title);
+
+if (!author) {
+  throw new Error(`Unknown insight author: ${insight.data.authorId}`);
+}
+
+const articleSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Article',
+  headline: insight.data.title,
+  description: insight.data.description,
+  image: new URL(insight.data.coverImage, Astro.site ?? 'https://aietta.net').href,
+  datePublished: insight.data.publishedAt.toISOString(),
+  dateModified: insight.data.updatedAt.toISOString(),
+  mainEntityOfPage: articleUrl,
+  author: {
+    '@type': 'Person',
+    name: author.name,
+    ...(author.linkedinUrl ? { sameAs: author.linkedinUrl } : {}),
+  },
+  publisher: {
+    '@type': 'Organization',
+    name: 'AI ETTÄ!',
+    url: 'https://aietta.net/',
+  },
+};
+---
+
+<BaseLayout title={`${insight.data.title} — AI ETTÄ!`} description={insight.data.description} image={insight.data.coverImage} pageType="article" publishedTime={insight.data.publishedAt} modifiedTime={insight.data.updatedAt} authorName={author.name}>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)}></script>
+  <main>
+    <div class="top-shape" aria-hidden="true"></div>
+    <div class="shell">
+      <Header currentPath="/oivallukset/" />
+      <article class="article-page">
+        <a class="back-link" href="/oivallukset/">← Kaikki oivallukset</a>
+        <header class="article-header">
+          <p class="insight-type">{insightTypeLabels[insight.data.type]} · {formatInsightDate(insight.data.publishedAt)}</p>
+          <h1>{insight.data.title}</h1>
+          <p class="article-lead">{insight.data.description}</p>
+          <div class="article-author">
+            <img src={author.photo} alt={author.name} width="160" height="160" decoding="async" />
+            <div>
+              <p class="article-author-label">Kirjoittaja</p>
+              <h2>{author.name}</h2>
+              <p>{author.bio}</p>
+              {author.linkedinUrl && <a class="text-link" href={author.linkedinUrl} target="_blank" rel="noreferrer">LinkedIn-profiili</a>}
+            </div>
+          </div>
+        </header>
+
+        <img class="article-cover" src={insight.data.coverImage} alt="" width="1200" height="675" fetchpriority="high" decoding="async" />
+
+        <div class="article-layout">
+          <div class="article-prose">
+            <Content />
+          </div>
+          <aside class="article-aside">
+            {relatedEvent && (
+              <section class="article-event">
+                <p class="article-author-label">LIITTYY TAPAHTUMAAN</p>
+                <h2>{relatedEvent.title}</h2>
+                <p>{relatedEvent.subtitle}</p>
+                <a class="text-link" href={`/tapahtumat/${relatedEvent.slug}/`}>Katso tapahtuma</a>
+              </section>
+            )}
+            <section class="article-share" aria-labelledby="share-title">
+              <p class="article-author-label" id="share-title">JAA KIRJOITUS</p>
+              <a href={`https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}`} target="_blank" rel="noreferrer">LinkedIn</a>
+              <a href={`mailto:?subject=${shareTitle}&body=${shareUrl}`}>Sähköposti</a>
+            </section>
+          </aside>
+        </div>
+
+        {relatedInsights.length > 0 && (
+          <section class="related-insights" aria-labelledby="related-title">
+            <div>
+              <p class="eyebrow"><span></span> JATKA LUKEMISTA</p>
+              <h2 id="related-title">Aiheeseen liittyvät oivallukset</h2>
+            </div>
+            <div class="insight-grid">
+              {relatedInsights.map((relatedInsight) => <InsightCard insight={relatedInsight} />)}
+            </div>
+          </section>
+        )}
+      </article>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

@@ -5,16 +5,25 @@ interface Props {
   title: string;
   description?: string;
   image?: string;
+  pageType?: 'website' | 'article';
+  publishedTime?: Date;
+  modifiedTime?: Date;
+  authorName?: string;
 }
 
 const {
   title,
   description = 'AI ETTÄ! on avoin suomalainen data- ja tekoäly-yhteisö.',
   image = '/images/og.png',
+  pageType = 'website',
+  publishedTime,
+  modifiedTime,
+  authorName,
 } = Astro.props;
 const siteUrl = Astro.site ?? new URL('https://aietta.net');
 const canonicalUrl = new URL(Astro.url.pathname, siteUrl).href;
 const socialImageUrl = new URL(image, siteUrl).href;
+const socialImageType = image.endsWith('.webp') ? 'image/webp' : image.endsWith('.jpg') || image.endsWith('.jpeg') ? 'image/jpeg' : 'image/png';
 const organizationSchema = {
   '@context': 'https://schema.org',
   '@type': 'Organization',
@@ -36,12 +45,12 @@ const organizationSchema = {
     <link rel="canonical" href={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <meta property="og:type" content={pageType} />
     <meta property="og:locale" content="fi_FI" />
     <meta property="og:site_name" content="AI ETTÄ!" />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:image" content={socialImageUrl} />
-    <meta property="og:image:type" content="image/png" />
+    <meta property="og:image:type" content={socialImageType} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="AI ETTÄ! – Ideoista vaikuttaviin AI-ratkaisuihin" />
@@ -50,6 +59,9 @@ const organizationSchema = {
     <meta name="twitter:description" content={description} />
     <meta name="twitter:image" content={socialImageUrl} />
     <meta name="twitter:image:alt" content="AI ETTÄ! – Ideoista vaikuttaviin AI-ratkaisuihin" />
+    {pageType === 'article' && publishedTime && <meta property="article:published_time" content={publishedTime.toISOString()} />}
+    {pageType === 'article' && modifiedTime && <meta property="article:modified_time" content={modifiedTime.toISOString()} />}
+    {pageType === 'article' && authorName && <meta property="article:author" content={authorName} />}
     <script type="application/ld+json" set:html={JSON.stringify(organizationSchema)}></script>
     <title>{title}</title>
     <script async src="https://www.googletagmanager.com/gtm.js?id=GTM-KTPG23SP"></script>

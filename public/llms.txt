@@ -5,6 +5,7 @@
 ## Ensisijaiset sivut
 
 - [Etusivu](https://aietta.net/): Yhteisön tarkoitus, seuraava tapahtuma ja postituslista.
+- [Oivallukset](https://aietta.net/oivallukset/): Toimituksellisesti hyväksytyt tapahtumien oivallukset, asiantuntijakirjoitukset ja keskustelunavaukset.
 - [Mikä AI ETTÄ!?](https://aietta.net/mika-ai-etta/): Yhteisön tausta, toimintaperiaatteet ja perustaja.
 - [Stagella](https://aietta.net/stagella/): Tapahtumissa alustaneet ihmiset, heidän aiheet ja LinkedIn-profiilit.
 
