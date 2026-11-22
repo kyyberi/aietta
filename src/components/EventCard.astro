@@ -29,7 +29,7 @@ const eventHref = `/tapahtumat/${event.slug}/`;
   </div>
   <div class="event-action">
     {event.registrationStatus === 'open' && event.registrationFormId ? (
-      <a class="orange-button" href={`${eventHref}#ilmoittaudu`}>Ilmoittaudu <span aria-hidden="true">→</span></a>
+      <a class="orange-button" href={eventHref}>Ilmoittaudu <span aria-hidden="true">→</span></a>
     ) : (
       <span class="registration-soon">Ilmoittautuminen<br />avautuu pian</span>
     )}

@@ -72,7 +72,14 @@ const eventSchema = {
           {event.registrationStatus === 'open' && event.registrationFormId ? (
             <aside class="registration-panel registration-open" id="ilmoittaudu">
               <p class="event-kicker">Tule mukaan</p>
-              <div class="ml-embedded" data-form={event.registrationFormId}></div>
+              <p class="registration-guidance">Syötä sähköpostiosoitteesi ja vahvista “I’m not a robot” -tarkistus ennen ilmoittautumista.</p>
+              <div class="registration-form-slot">
+                <div class="ml-embedded" data-form={event.registrationFormId}></div>
+                <p class="registration-form-fallback" data-embedded-form-fallback hidden role="status">
+                  Ilmoittautumislomake ei latautunut. Jos käytät sisällönestoa, kokeile sallia MailerLite tai
+                  <a href={`mailto:work@jarkkomoilanen.com?subject=${encodeURIComponent(`Ilmoittautuminen: ${event.title}`)}`}>ilmoittaudu sähköpostilla</a>.
+                </p>
+              </div>
             </aside>
           ) : (
             <aside class="registration-panel" id="ilmoittaudu">

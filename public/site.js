@@ -22,4 +22,34 @@ const initialiseInsightFilters = () => {
   });
 };
 
+const initialiseEmbeddedFormFallbacks = () => {
+  const fallbacks = document.querySelectorAll('[data-embedded-form-fallback]');
+
+  fallbacks.forEach((fallback) => {
+    const slot = fallback.parentElement;
+    const embeddedForm = slot?.querySelector('.ml-embedded');
+
+    if (!embeddedForm) return;
+
+    let observer;
+    const hasUsableForm = () => Boolean(embeddedForm.querySelector('form, input, button'));
+    const updateFallback = () => {
+      if (!hasUsableForm()) return;
+
+      fallback.hidden = true;
+      observer?.disconnect();
+    };
+
+    observer = new MutationObserver(updateFallback);
+    observer.observe(embeddedForm, { childList: true, subtree: true });
+    updateFallback();
+
+    window.setTimeout(() => {
+      updateFallback();
+      if (!hasUsableForm()) fallback.hidden = false;
+    }, 4000);
+  });
+};
+
 initialiseInsightFilters();
+initialiseEmbeddedFormFallbacks();
