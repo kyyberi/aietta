@@ -8,6 +8,7 @@
 - [Oivallukset](https://aietta.net/oivallukset/): Toimituksellisesti hyväksytyt tapahtumien oivallukset, asiantuntijakirjoitukset ja keskustelunavaukset.
 - [Mikä AI ETTÄ!?](https://aietta.net/mika-ai-etta/): Yhteisön tausta, toimintaperiaatteet ja perustaja.
 - [Stagella](https://aietta.net/stagella/): Tapahtumissa alustaneet ihmiset, heidän aiheet ja LinkedIn-profiilit.
+- [Yrityksille](https://aietta.net/yrityksille/): Organisaatiokohtaiset AI- ja datatuoteseminaarit, työpajat, johdon strategiapäivät sekä tuki toteutukseen.
 
 ## Nykyinen tapahtuma
 
@@ -19,6 +20,23 @@
 - Käytännöllinen: yhteisö jakaa kokemuksia ja keskustelee toteutuksista.
 - Riippumaton: yhteisö on itsenäinen asiantuntija-aloite.
 
+## Yrityspalvelut
+
+Yrityspalvelut ovat erikseen sovittavia, kaupallisia ja yksittäiselle organisaatiolle toteutettavia palveluita. Ne eivät ole tarkoitettu yksittäisille osallistujille, eikä sivustolla ole verkkokauppaa tai maksamista. Palvelu etenee yhteydenotosta tarjous- ja sopimusprosessiin.
+
+- AI- ja datatuoteseminaari: 2 tuntia verkossa, alkaen 1 500 €.
+- AI- ja datatuotteiden mahdollisuustyöpaja: puoli päivää verkossa, alkaen 3 000 €.
+- Johdon AI- ja datatuotepäivä: räätälöity kokonaisuus verkossa tai sovitusti paikan päällä, alkaen 5 000 €.
+
+Hinnat ovat alkaen-hintoja. Lopullinen hinta määräytyy sisällön, laajuuden ja tarvittavien asiantuntijoiden mukaan. Mahdolliset verot ja matkakulut tarkennetaan tarjouksessa.
+
+AI ETTÄ! voi jatkaa sovittua työtä määrittelyyn, PoC:iin, MVP-toteutukseen ja tuotantoratkaisuun yhteistyökumppaneiden kanssa. Kumppanin kapasiteetti varmistetaan aina projektikohtaisesti.
+
+## Yhteistyö
+
+AI ETTÄ! aloittaa mielellään yritysyhteistyötä myös avoimen yhteisön puitteissa, esimerkiksi sponsoroinnin tai yhteisten tapahtumien muodossa. Nämä yhteistyömuodot sovitaan aina erikseen. Avoimet yhteisötapahtumat säilyvät maksuttomina.
+
 ## Yhteydenotto
 
+- Yrityspalvelut ja yhteistyö: mailto:work@jarkkomoilanen.com?subject=AI%20ETT%C3%84!%20%E2%80%93%20Yrityspalvelut
 - Lisätietoa: https://jarkkomoilanen.com/
