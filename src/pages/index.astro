@@ -36,6 +36,14 @@ const latestInsights = sortInsightsByDate(await getCollection('oivallukset', ({ 
 
     <div class="shell content-shell">
       {nextEvent && <EventCard event={nextEvent} />}
+      <section class="enterprise-home-promo" aria-labelledby="enterprise-home-title">
+        <div>
+          <p class="eyebrow"><span></span> AI ETTÄ! YRITYKSILLE</p>
+          <h2 id="enterprise-home-title">AI ETTÄ! myös yrityksille</h2>
+          <p>Oma AI- ja datatuoteseminaari, ohjattu työpaja tai tuki ratkaisun toteutukseen.</p>
+        </div>
+        <a class="outline-button" href="/yrityksille/">Tutustu yrityspalveluihin</a>
+      </section>
       <section class="past-events" id="menneet" aria-labelledby="past-title">
         <h2 id="past-title">Menneet tapahtumat <span aria-hidden="true">⌁</span></h2>
         <div class="empty-state">

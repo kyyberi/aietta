@@ -8,7 +8,7 @@ const xmlEscape = (value: string) => value.replace(/[<>&'\"]/g, (character) => (
 
 export const GET: APIRoute = async ({ site }) => {
   const baseUrl = site ?? new URL('https://aietta.net');
-  const staticPaths = ['/', '/mika-ai-etta/', '/stagella/', '/tapahtumat/ai-tarvitsee-muutakin-kuin-teknologiaa/', '/oivallukset/'];
+  const staticPaths = ['/', '/mika-ai-etta/', '/stagella/', '/yrityksille/', '/tapahtumat/ai-tarvitsee-muutakin-kuin-teknologiaa/', '/oivallukset/'];
   const insights = sortInsightsByDate(await getCollection('oivallukset', ({ data }) => !data.draft));
   const urls: { loc: string; lastmod?: string }[] = [
     ...staticPaths.map((path) => ({ loc: new URL(path, baseUrl).href, lastmod: undefined })),
