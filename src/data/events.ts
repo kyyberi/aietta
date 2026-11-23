@@ -82,6 +82,7 @@ export const events: Event[] = [
       'Keskustelussa yhdistyvät liiketoiminnan, tuotejohtamisen, arkkitehtuurin ja AI-hallinnan näkökulmat. Tilaisuus ei edellytä syvällistä teknistä osaamista.',
     ],
     registrationFormId: 'LYjR3h',
+    registrationCount: 11,
     registrationStatus: 'open',
     published: true,
   },

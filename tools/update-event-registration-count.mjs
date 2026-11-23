@@ -5,11 +5,15 @@ import { fileURLToPath } from 'node:url';
 
 const DEFAULT_EVENT_ID = 'ai-tarvitsee-muutakin-kuin-teknologiaa';
 const EVENTS_FILE = fileURLToPath(new URL('../src/data/events.ts', import.meta.url));
+const ENV_FILE = fileURLToPath(new URL('../.env.local', import.meta.url));
 
 const usage = `Usage:
-  MAILERLITE_API_TOKEN='…' MAILERLITE_FORM_ID='…' node tools/update-event-registration-count.mjs [options]
+  node tools/update-event-registration-count.mjs [options]
+
+Set MAILERLITE_API_TOKEN and MAILERLITE_FORM_ID in .env.local, or provide them as shell variables.
 
 Options:
+  --list-forms     List MailerLite API form ids, types, public slugs, and conversion counts
   --event-id <id>  Event id in src/data/events.ts (default: ${DEFAULT_EVENT_ID})
   --form-id <id>   MailerLite API form id (overrides MAILERLITE_FORM_ID)
   --dry-run        Print the active registration count without changing a file
@@ -30,29 +34,97 @@ if (args.includes('--help')) {
   process.exit(0);
 }
 
-const token = process.env.MAILERLITE_API_TOKEN;
-const formId = readOption('--form-id') ?? process.env.MAILERLITE_FORM_ID;
+const readLocalEnv = async () => {
+  try {
+    const content = await readFile(ENV_FILE, 'utf8');
+    return Object.fromEntries(
+      content.split(/\r?\n/).flatMap((line) => {
+        const match = line.match(/^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/);
+        if (!match) return [];
+        const [, key, rawValue] = match;
+        const value = rawValue.replace(/^(?:"([\s\S]*)"|'([\s\S]*)')$/, (_quoted, doubleQuoted, singleQuoted) => doubleQuoted ?? singleQuoted);
+        return [[key, value]];
+      }),
+    );
+  } catch (error) {
+    if (error?.code === 'ENOENT') return {};
+    throw error;
+  }
+};
+
+const localEnv = await readLocalEnv();
+const token = process.env.MAILERLITE_API_TOKEN ?? localEnv.MAILERLITE_API_TOKEN;
+const formId = readOption('--form-id') ?? process.env.MAILERLITE_FORM_ID ?? localEnv.MAILERLITE_FORM_ID;
 const eventId = readOption('--event-id') ?? DEFAULT_EVENT_ID;
 const dryRun = args.includes('--dry-run');
+const listForms = args.includes('--list-forms');
 
 if (!token) throw new Error('MAILERLITE_API_TOKEN is required.');
+
+const headers = {
+  Accept: 'application/json',
+  Authorization: `Bearer ${token}`,
+};
+
+const getForms = async () => {
+  const forms = [];
+  for (const type of ['embedded', 'popup', 'promotion']) {
+    let page = 1;
+    while (true) {
+      const formsUrl = new URL(`https://connect.mailerlite.com/api/forms/${type}`);
+      formsUrl.searchParams.set('limit', '100');
+      formsUrl.searchParams.set('page', String(page));
+      const response = await fetch(formsUrl, { headers });
+      if (!response.ok) {
+        const detail = await response.text();
+        throw new Error(`MailerLite form list request failed (${response.status}): ${detail.slice(0, 300)}`);
+      }
+
+      const payload = await response.json();
+      forms.push(...(Array.isArray(payload.data) ? payload.data : []));
+      if (page >= Number(payload.meta?.last_page ?? 1)) break;
+      page += 1;
+    }
+  }
+  return forms;
+};
+
+if (listForms) {
+  const forms = await getForms();
+  if (forms.length === 0) {
+    process.stdout.write('No MailerLite forms found.\n');
+  } else {
+    process.stdout.write('MailerLite API forms:\n');
+    for (const form of forms) {
+      const name = String(form.name ?? 'Unnamed form').replace(/[\r\n\t]+/g, ' ');
+      const conversions = form.conversions_count ?? 0;
+      process.stdout.write(`${form.id}\t${form.type}\t${form.slug ?? '—'}\t${name}\t${conversions} conversions\n`);
+    }
+  }
+  process.exit(0);
+}
+
 if (!formId) throw new Error('MAILERLITE_FORM_ID or --form-id is required.');
 
-const apiUrl = new URL(`https://connect.mailerlite.com/api/forms/${encodeURIComponent(formId)}/subscribers`);
-apiUrl.searchParams.set('limit', '100');
+const forms = await getForms();
+const matchingForm = forms.find((form) => String(form.id) === formId || form.slug === formId);
+const resolvedFormId = String(matchingForm?.id ?? formId);
+if (!matchingForm && !/^\d+$/.test(formId)) {
+  throw new Error(`No MailerLite form matched "${formId}". Run with --list-forms to inspect available forms.`);
+}
 
-let page = 1;
+const apiUrl = new URL('https://connect.mailerlite.com/api/subscribers');
+apiUrl.searchParams.set('filter[form]', resolvedFormId);
+apiUrl.searchParams.set('filter[status]', 'active');
+apiUrl.searchParams.set('limit', '1000');
+
 let activeCount = 0;
 let pageCount = 0;
+let cursor;
 
 while (true) {
-  apiUrl.searchParams.set('page', String(page));
-  const response = await fetch(apiUrl, {
-    headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  if (cursor) apiUrl.searchParams.set('cursor', cursor);
+  const response = await fetch(apiUrl, { headers });
 
   if (!response.ok) {
     const detail = await response.text();
@@ -61,18 +133,12 @@ while (true) {
 
   const payload = await response.json();
   const subscribers = Array.isArray(payload.data) ? payload.data : [];
-  activeCount += subscribers.filter((subscriber) => subscriber.status === 'active').length;
+  activeCount += subscribers.length;
   pageCount += 1;
 
-  const lastPage = Number(payload.meta?.last_page);
-  if (Number.isFinite(lastPage)) {
-    if (page >= lastPage) break;
-  } else if (subscribers.length < 100) {
-    break;
-  }
-
-  page += 1;
-  if (page > 10_000) throw new Error('Stopped after 10,000 pages because MailerLite pagination was invalid.');
+  cursor = payload.meta?.next_cursor;
+  if (!cursor) break;
+  if (pageCount > 10_000) throw new Error('Stopped after 10,000 pages because MailerLite pagination was invalid.');
 }
 
 if (dryRun) {

@@ -30,10 +30,11 @@ Kirjoittajat määritellään kerran tiedostossa `src/data/authors.ts`. Ennen ju
 
 ## Ilmoittautuneiden määrän päivitys
 
-Tapahtumasivu voi näyttää vahvistettujen ilmoittautuneiden määrän. Päivitä se paikallisesti MailerLite API:lla ja julkaise muutos normaalina Git-commitina:
+Tapahtumasivu voi näyttää vahvistettujen ilmoittautuneiden määrän. Lisää MailerLite-tiedot paikalliseen `.env.local`-tiedostoon (tiedosto on Git-ignorattu):
 
 ```bash
-MAILERLITE_API_TOKEN='…' MAILERLITE_FORM_ID='…' node tools/update-event-registration-count.mjs
+MAILERLITE_API_TOKEN=
+MAILERLITE_FORM_ID=
 ```
 
-`MAILERLITE_FORM_ID` on MailerLite API:n lomaketunniste. Se voi olla eri kuin sivulle upotetun lomakkeen tunniste. Tarkista tunniste MailerLite-hallinnasta tai Forms API:sta. Skripti laskee vain aktiiviset tilaajat, kirjoittaa luvun tapahtuman `registrationCount`-kenttään ja jättää API-avaimen Gitin ulkopuolelle. Lisää `--dry-run`, jos haluat vain tarkistaa määrän.
+`MAILERLITE_FORM_ID` voi olla MailerLite API:n lomaketunniste tai sivulle upotetun lomakkeen tunniste (slug). Tarkista käytettävissä olevat tunnisteet komennolla `node tools/update-event-registration-count.mjs --list-forms`. Päivitä sitten määrä komennolla `node tools/update-event-registration-count.mjs`. Skripti laskee vain aktiiviset tilaajat, kirjoittaa luvun tapahtuman `registrationCount`-kenttään ja jättää API-avaimen Gitin ulkopuolelle. Lisää `--dry-run`, jos haluat vain tarkistaa määrän.
