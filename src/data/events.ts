@@ -22,6 +22,7 @@ export type Event = {
   eventImage?: string;
   registrationUrl?: string;
   registrationFormId?: string;
+  registrationCount?: number;
   registrationStatus: 'open' | 'soon' | 'closed';
   highlights?: string[];
   audience?: string[];
