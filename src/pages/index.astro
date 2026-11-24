@@ -51,7 +51,7 @@ const latestNews = sortNewsByDate(await getCollection('uutiset', ({ data }) => !
             {latestNews.map((item) => (
               <li>
                 <time datetime={item.data.publishedAt.toISOString()}>{formatNewsDate(item.data.publishedAt)}</time>
-                <a href={`/uutiset/${item.data.slug}/`}>{item.data.topic}</a>
+                <a href={`/uutiset/#${item.data.slug}`}>{item.data.topic}</a>
               </li>
             ))}
           </ol>
