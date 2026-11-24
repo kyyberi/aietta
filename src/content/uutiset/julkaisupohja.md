@@ -1,6 +1,7 @@
 ---
 slug: ilmoituksen-pysyva-osoite
 topic: Ilmoituksen aihe
+category: UUTINEN
 publishedAt: 2026-11-24
 link: https://example.com/
 linkLabel: Lue lisää

@@ -24,6 +24,7 @@ const uutiset = defineCollection({
   schema: z.object({
     slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
     topic: z.string().min(1),
+    category: z.string().min(1).default('UUTINEN'),
     publishedAt: z.coerce.date(),
     link: z.string().min(1).optional(),
     linkLabel: z.string().min(1).optional(),

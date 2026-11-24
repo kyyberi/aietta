@@ -13,32 +13,37 @@ const newsItems = sortNewsByDate(await getCollection('uutiset', ({ data }) => !d
     <div class="top-shape" aria-hidden="true"></div>
     <div class="shell">
       <Header currentPath="/uutiset/" />
-      <section class="news-hero" aria-labelledby="news-title">
-        <p class="eyebrow"><span></span> UUTISET</p>
-        <h1 id="news-title">Ajankohtaista<br /><em>AI ETTÄ!stä.</em></h1>
-        <p>Lyhyitä ilmoituksia yhteisön tapahtumista, julkaisuista ja muista ajankohtaisista asioista.</p>
-      </section>
+      <div class="news-layout">
+        <section class="news-hero" aria-labelledby="news-title">
+          <p class="eyebrow"><span></span> UUTISET</p>
+          <h1 id="news-title">Ajankohtaista<br /><em>AI ETTÄ!stä.</em></h1>
+          <p>Lyhyitä ilmoituksia yhteisön tapahtumista, julkaisuista ja muista ajankohtaisista asioista.</p>
+        </section>
 
-      {newsItems.length > 0 ? (
-        <section class="news-list" aria-label="Uusimmat ilmoitukset">
-          {newsItems.map((item) => (
-            <article class="news-item">
-              <time datetime={item.data.publishedAt.toISOString()}>{formatNewsDate(item.data.publishedAt)}</time>
-              <div>
-                <h2><a href={`/uutiset/${item.data.slug}/`}>{item.data.topic}</a></h2>
-                <p>{limitNewsWords(item.body)}</p>
-                <a class="text-link" href={`/uutiset/${item.data.slug}/`}>Lue ilmoitus</a>
-              </div>
-            </article>
-          ))}
-        </section>
-      ) : (
-        <section class="news-empty" aria-labelledby="news-empty-title">
-          <p class="insight-type">AJANKOHTAISTA</p>
-          <h2 id="news-empty-title">Ensimmäiset uutiset ovat tulossa.</h2>
-          <p>Julkaisemme täällä yhteisön lyhyet, ajankohtaiset ilmoitukset.</p>
-        </section>
-      )}
+        {newsItems.length > 0 ? (
+          <section class="news-list" aria-label="Uusimmat ilmoitukset">
+            {newsItems.map((item) => (
+              <article>
+                <a class="news-card" href={`/uutiset/${item.data.slug}/`} aria-label={`Lue ilmoitus: ${item.data.topic}`}>
+                  <div class="news-card-meta">
+                    <time datetime={item.data.publishedAt.toISOString()}>{formatNewsDate(item.data.publishedAt)}</time>
+                    <span>{item.data.category}</span>
+                  </div>
+                  <h2>{item.data.topic}</h2>
+                  <p>{limitNewsWords(item.body)}</p>
+                  <span class="news-card-arrow" aria-hidden="true">→</span>
+                </a>
+              </article>
+            ))}
+          </section>
+        ) : (
+          <section class="news-empty" aria-labelledby="news-empty-title">
+            <p class="insight-type">AJANKOHTAISTA</p>
+            <h2 id="news-empty-title">Ensimmäiset uutiset ovat tulossa.</h2>
+            <p>Julkaisemme täällä yhteisön lyhyet, ajankohtaiset ilmoitukset.</p>
+          </section>
+        )}
+      </div>
     </div>
   </main>
   <Footer />
