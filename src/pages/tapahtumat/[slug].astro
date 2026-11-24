@@ -16,7 +16,7 @@ const eventUrl = new URL(`/tapahtumat/${event.slug}/`, Astro.site ?? 'https://ai
 const relatedInsights = sortInsightsByDate(
   (await getCollection('oivallukset', ({ data }) => !data.draft)).filter((insight) => insight.data.relatedEventId === event.id),
 );
-const eventSchema = {
+const eventSchema = event.startTime && event.endTime ? {
   '@context': 'https://schema.org',
   '@type': 'Event',
   name: event.title,
@@ -41,35 +41,52 @@ const eventSchema = {
     priceCurrency: 'EUR',
     availability: 'https://schema.org/InStock',
   },
-};
+} : undefined;
+const speakerContactHref = `mailto:work@jarkkomoilanen.com?subject=${encodeURIComponent(`Alustus: ${event.title}`)}`;
 ---
 
 <BaseLayout title={`${event.title} — AI ETTÄ!`} description={event.description}>
-  <script type="application/ld+json" set:html={JSON.stringify(eventSchema)}></script>
+  {eventSchema && <script type="application/ld+json" set:html={JSON.stringify(eventSchema)}></script>}
   <main>
     <div class="top-shape" aria-hidden="true"></div>
     <div class="shell">
       <Header currentPath="/tapahtumat/" />
       <article class="event-page">
         <a class="back-link" href="/#tulevat">← Kaikki tapahtumat</a>
-        <p class="eyebrow"><span></span> MAKSUTON ONLINE-KESKUSTELU</p>
+        <p class="eyebrow"><span></span> {event.planning ? 'TAPAHTUMA VALMISTEILLA' : 'MAKSUTON ONLINE-KESKUSTELU'}</p>
         <h1>{event.title}</h1>
         <p class="event-lead">{event.subtitle}</p>
         <div class="event-details">
-          <div><span>Päivä ja aika</span><strong>{formatEventDate(event.startTime)} Suomen aikaa</strong></div>
-          <div><span>Muoto</span><strong>Maksuton online-keskustelu</strong></div>
-          <div><span>Tallenne</span><strong>Tilaisuutta ei tallenneta</strong></div>
+          <div><span>{event.planning ? 'Ajankohta' : 'Päivä ja aika'}</span><strong>{event.dateLabel ?? `${formatEventDate(event.startTime!)} Suomen aikaa`}</strong></div>
+          <div><span>Muoto</span><strong>{event.formatLabel ?? 'Maksuton online-keskustelu'}</strong></div>
+          <div><span>{event.planning ? 'Ilmoittautuminen' : 'Tallenne'}</span><strong>{event.planning ? 'Avautuu myöhemmin' : 'Tilaisuutta ei tallenneta'}</strong></div>
         </div>
         <section class="event-body-grid">
           <div>
-            <h2>Mistä keskustellaan?</h2>
+            <h2>{event.planning ? 'Mitä on suunnitteilla?' : 'Mistä keskustellaan?'}</h2>
             <p>{event.description}</p>
-            <h2>Ohjelma</h2>
-            <ol class="agenda">
-              {event.agenda.map((item) => <li>{item}</li>)}
-            </ol>
+            {event.agenda.length > 0 ? (
+              <>
+                <h2>Ohjelma</h2>
+                <ol class="agenda">
+                  {event.agenda.map((item) => <li>{item}</li>)}
+                </ol>
+              </>
+            ) : (
+              <div class="agenda-pending">
+                <h2>Agenda tarkentuu yhdessä</h2>
+                <p>Kolme alustajapaikkaa ovat avoinna. Keskustelemme ehdotuksista ja rakennamme tilaisuuden sisällön niiden pohjalta.</p>
+              </div>
+            )}
           </div>
-          {event.registrationStatus === 'open' && event.registrationFormId ? (
+          {event.planning ? (
+            <aside class="registration-panel registration-open speaker-callout" id="alustajaksi">
+              <p class="event-kicker">Alustajaksi?</p>
+              <h2>Kolme alustajapaikkaa on avoinna.</h2>
+              <p>Haluatko tuoda oman näkökulmasi, kokemuksesi tai kysymyksesi yhteiseen keskusteluun? Ota yhteyttä, niin jutellaan alustuksesta.</p>
+              <a class="orange-button" href={speakerContactHref}>Ota yhteyttä <span aria-hidden="true">↗</span></a>
+            </aside>
+          ) : event.registrationStatus === 'open' && event.registrationFormId ? (
             <aside class="registration-panel registration-open" id="ilmoittaudu">
               <p class="event-kicker">Tule mukaan</p>
               <p class="registration-guidance">Syötä sähköpostiosoitteesi ja lähetä ilmoittautuminen. Osallistumislinkki lähetetään ilmoittautuneille sähköpostitse ennen tilaisuutta.</p>
@@ -104,8 +121,8 @@ const eventSchema = {
           </section>
         )}
         <section class="speaker-section">
-          <p class="event-kicker">Keskustelijat</p>
-          <h2>Kolme näkökulmaa, yksi yhteinen keskustelu.</h2>
+          <p class="event-kicker">{event.planning ? 'ALUSTAJAHAKU' : 'KESKUSTELIJAT'}</p>
+          <h2>{event.planning ? 'Kolme avointa alustajapaikkaa.' : 'Kolme näkökulmaa, yksi yhteinen keskustelu.'}</h2>
           <div class="speaker-detail-grid">
             {event.speakers.map((speaker) => (
               <article class="speaker-detail">
@@ -118,7 +135,7 @@ const eventSchema = {
                 <p class="speaker-title">{speaker.title}</p>
                 <h4>{speaker.topic}</h4>
                 <p>{speaker.description}</p>
-                {speaker.discussionPrompt && <p class="discussion-prompt">{speaker.discussionPrompt}</p>}
+                {speaker.discussionPrompt && (event.planning ? <a class="discussion-prompt" href={speakerContactHref}>{speaker.discussionPrompt}</a> : <p class="discussion-prompt">{speaker.discussionPrompt}</p>)}
               </article>
             ))}
           </div>

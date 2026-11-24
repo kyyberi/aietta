@@ -10,7 +10,8 @@ import { events } from '../data/events';
 import { sortInsightsByDate } from '../data/insights';
 import { formatNewsDate, sortNewsByDate } from '../data/news';
 
-const nextEvent = events.find((event) => event.published);
+const nextEvent = events.find((event) => event.published && !event.planning);
+const plannedEvents = events.filter((event) => event.published && event.planning);
 const latestInsights = sortInsightsByDate(await getCollection('oivallukset', ({ data }) => !data.draft)).slice(0, 3);
 const latestNews = sortNewsByDate(await getCollection('uutiset', ({ data }) => !data.draft)).slice(0, 5);
 ---
@@ -45,6 +46,22 @@ const latestNews = sortNewsByDate(await getCollection('uutiset', ({ data }) => !
         </div>
         <div class="home-section-content">
           {nextEvent && <EventCard event={nextEvent} />}
+          {plannedEvents.length > 0 && (
+            <section class="planned-events" aria-labelledby="planned-events-title">
+              <p class="section-kicker">TULOSSA</p>
+              <h3 id="planned-events-title">Valmistelussa olevat tapahtumat</h3>
+              <div>
+                {plannedEvents.map((event) => (
+                  <article>
+                    <p>{event.dateLabel}</p>
+                    <h4><a href={`/tapahtumat/${event.slug}/`}>{event.title}</a></h4>
+                    <p>{event.subtitle}</p>
+                    <a class="text-link" href={`/tapahtumat/${event.slug}/`}>Katso alustajakutsu</a>
+                  </article>
+                ))}
+              </div>
+            </section>
+          )}
           <section class="past-events" id="menneet" aria-labelledby="past-title">
             <div>
               <p class="section-kicker">AIEMMAT TAPAHTUMAT</p>

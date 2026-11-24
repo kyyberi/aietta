@@ -6,6 +6,7 @@ export type Speaker = {
   discussionPrompt?: string;
   photo?: string;
   linkedinUrl?: string;
+  placeholder?: boolean;
 };
 
 export type Event = {
@@ -14,8 +15,10 @@ export type Event = {
   title: string;
   subtitle: string;
   description: string;
-  startTime: string;
-  endTime: string;
+  startTime?: string;
+  endTime?: string;
+  dateLabel?: string;
+  formatLabel?: string;
   timezone: string;
   speakers: Speaker[];
   agenda: string[];
@@ -26,6 +29,7 @@ export type Event = {
   registrationStatus: 'open' | 'soon' | 'closed';
   highlights?: string[];
   audience?: string[];
+  planning?: boolean;
   published: boolean;
 };
 
@@ -84,6 +88,47 @@ export const events: Event[] = [
     registrationFormId: 'LYjR3h',
     registrationCount: 22,
     registrationStatus: 'open',
+    published: true,
+  },
+  {
+    id: 'tammikuun-2027-tapaaminen',
+    slug: 'tammikuun-2027-tapaaminen',
+    title: 'AI ETTÄ! -tapaaminen tammikuussa 2027',
+    subtitle: 'Päivämäärä, agenda ja alustajat tarkentuvat.',
+    description:
+      'Valmistelemme AI ETTÄ! -yhteisön tammikuun 2027 tapaamista. Päivämäärä ja keskustelun agenda tarkentuvat myöhemmin, mutta etsimme jo nyt kolme alustajaa avaamaan keskustelua omista näkökulmistaan.',
+    dateLabel: 'Tammikuu 2027 · päivämäärä tarkentuu',
+    formatLabel: 'Toteutustapa tarkentuu',
+    timezone: 'Europe/Helsinki',
+    speakers: [
+      {
+        name: 'Avoin alustajapaikka 1',
+        title: 'Ensimmäinen näkökulma',
+        topic: 'Haluatko avata keskustelun?',
+        description: 'Ehdota omaa näkökulmaasi tai keskustelunavausta AI ETTÄ! -yhteisölle.',
+        discussionPrompt: 'Ota yhteyttä ja jutellaan alustuksesta.',
+        placeholder: true,
+      },
+      {
+        name: 'Avoin alustajapaikka 2',
+        title: 'Toinen näkökulma',
+        topic: 'Onko sinulla käytännön havainto jaettavana?',
+        description: 'Voit ehdottaa lyhyttä puheenvuoroa, kokemusta tai kysymystä yhteiseen keskusteluun.',
+        discussionPrompt: 'Ota yhteyttä ja jutellaan alustuksesta.',
+        placeholder: true,
+      },
+      {
+        name: 'Avoin alustajapaikka 3',
+        title: 'Kolmas näkökulma',
+        topic: 'Mikä AI- tai data-aihe ansaitsee yhteisen keskustelun?',
+        description: 'Tuo pöytään näkökulma, joka auttaa yhteisöä ajattelemaan aihetta uudella tavalla.',
+        discussionPrompt: 'Ota yhteyttä ja jutellaan alustuksesta.',
+        placeholder: true,
+      },
+    ],
+    agenda: [],
+    registrationStatus: 'soon',
+    planning: true,
     published: true,
   },
 ];

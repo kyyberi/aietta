@@ -11,7 +11,7 @@ type StagePerson = Speaker & {
 const peopleByName = new Map<string, StagePerson>();
 
 for (const event of events.filter((event) => event.published)) {
-  for (const speaker of event.speakers) {
+  for (const speaker of event.speakers.filter((speaker) => !speaker.placeholder)) {
     const person = peopleByName.get(speaker.name);
     if (person) {
       person.events.push({ title: event.title, slug: event.slug });
