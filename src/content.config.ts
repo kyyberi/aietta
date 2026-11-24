@@ -19,4 +19,16 @@ const oivallukset = defineCollection({
   }),
 });
 
-export const collections = { oivallukset };
+const uutiset = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/uutiset' }),
+  schema: z.object({
+    slug: z.string().regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/),
+    topic: z.string().min(1),
+    publishedAt: z.coerce.date(),
+    link: z.string().min(1).optional(),
+    linkLabel: z.string().min(1).optional(),
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { oivallukset, uutiset };

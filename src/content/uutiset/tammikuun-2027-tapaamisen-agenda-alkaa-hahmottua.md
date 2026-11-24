@@ -1,0 +1,8 @@
+---
+slug: tammikuun-2027-tapaamisen-agenda-alkaa-hahmottua
+topic: Tammikuun 2027 tapaamisen agenda alkaa hahmottua
+publishedAt: 2026-11-24
+draft: false
+---
+
+Ensimmäiset keskustelut ovat jo käynnissä tammikuun tapahtuman sisältöä koskien. Ensimmäinen alustaja on alustavasti ilmoittanut olevansa silloin ehkä tuomassa AI-suvereniteetin stagelle.

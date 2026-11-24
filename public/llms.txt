@@ -6,6 +6,7 @@
 
 - [Etusivu](https://aietta.net/): Yhteisön tarkoitus, seuraava tapahtuma ja postituslista.
 - [Oivallukset](https://aietta.net/oivallukset/): Toimituksellisesti hyväksytyt tapahtumien oivallukset, asiantuntijakirjoitukset ja keskustelunavaukset.
+- [Uutiset](https://aietta.net/uutiset/): Lyhyet, päivämäärä- ja aihepohjaiset yhteisön ilmoitukset. Sivulla näkyy enintään 30 uusinta ilmoitusta.
 - [Mikä AI ETTÄ!?](https://aietta.net/mika-ai-etta/): Yhteisön tausta, toimintaperiaatteet ja perustaja.
 - [Stagella](https://aietta.net/stagella/): Tapahtumissa alustaneet ihmiset, heidän aiheet ja LinkedIn-profiilit.
 - [Yrityksille](https://aietta.net/yrityksille/): Organisaatiokohtaiset AI- ja datatuoteseminaarit, työpajat, johdon strategiapäivät sekä tuki toteutukseen.
