@@ -96,7 +96,7 @@ export const events: Event[] = [
     title: 'AI ETTÄ! -tapaaminen tammikuussa 2027',
     subtitle: 'Päivämäärä, agenda ja alustajat tarkentuvat.',
     description:
-      'Valmistelemme AI ETTÄ! -yhteisön tammikuun 2027 tapaamista. Päivämäärä ja keskustelun agenda tarkentuvat myöhemmin. Timo Lehtonen avaa keskustelua AI:n tuottaman koodin tarkistamisesta, ja etsimme lisää alustajia.',
+      'Valmistelemme AI ETTÄ! -yhteisön tammikuun 2027 tapaamista. Timo Lehtonen ja Jarkko Moilanen avaavat keskustelua AI:n roolista ohjelmistokehityksessä ja datatuotteiden rakentamisessa. Päivämäärä ja agenda tarkentuvat myöhemmin, ja etsimme vielä yhtä alustajaa.',
     dateLabel: 'Tammikuu 2027 · päivämäärä tarkentuu',
     formatLabel: 'Toteutustapa tarkentuu',
     timezone: 'Europe/Helsinki',
@@ -110,12 +110,13 @@ export const events: Event[] = [
         photo: '/images/speakers/timo-lehtonen.png',
       },
       {
-        name: 'Avoin alustajapaikka 2',
-        title: 'Toinen näkökulma',
-        topic: 'Onko sinulla käytännön havainto jaettavana?',
-        description: 'Voit ehdottaa lyhyttä puheenvuoroa, kokemusta tai kysymystä yhteiseen keskusteluun.',
-        discussionPrompt: 'Ota yhteyttä ja jutellaan alustuksesta.',
-        placeholder: true,
+        name: 'Jarkko Moilanen',
+        title: 'AI ETTÄ! -yhteisön perustaja',
+        topic: 'Tarvitaanko datatuotteen rakentamiseen enää ihmistä?',
+        description: 'Miten liiketoimintadokumentista syntyy datatuote OpenMetadatan markkinapaikkaan? Miten AI löytää tarpeeseen sopivaa dataa, ja mitä AI-koodausavustaja saa Jira-tehtävässä?',
+        discussionPrompt: 'Missä vaiheessa ihminen tarkistaa työn?',
+        photo: '/images/speakers/jarkko-moilanen.webp',
+        linkedinUrl: 'https://www.linkedin.com/in/jarkkomoilanen/',
       },
       {
         name: 'Avoin alustajapaikka 3',
