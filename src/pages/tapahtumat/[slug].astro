@@ -75,14 +75,14 @@ const speakerContactHref = `mailto:work@jarkkomoilanen.com?subject=${encodeURICo
             ) : (
               <div class="agenda-pending">
                 <h2>Agenda tarkentuu yhdessä</h2>
-                <p>Kolme alustajapaikkaa ovat avoinna. Keskustelemme ehdotuksista ja rakennamme tilaisuuden sisällön niiden pohjalta.</p>
+                <p>Keskustelemme alustusehdotuksista ja rakennamme tilaisuuden sisällön niiden pohjalta.</p>
               </div>
             )}
           </div>
           {event.planning ? (
             <aside class="registration-panel registration-open speaker-callout" id="alustajaksi">
               <p class="event-kicker">Alustajaksi?</p>
-              <h2>Kolme alustajapaikkaa on avoinna.</h2>
+              <h2>Etsimme lisää alustajia.</h2>
               <p>Haluatko tuoda oman näkökulmasi, kokemuksesi tai kysymyksesi yhteiseen keskusteluun? Ota yhteyttä, niin jutellaan alustuksesta.</p>
               <a class="orange-button" href={speakerContactHref}>Ota yhteyttä <span aria-hidden="true">↗</span></a>
             </aside>
@@ -122,7 +122,7 @@ const speakerContactHref = `mailto:work@jarkkomoilanen.com?subject=${encodeURICo
         )}
         <section class="speaker-section">
           <p class="event-kicker">{event.planning ? 'ALUSTAJAHAKU' : 'KESKUSTELIJAT'}</p>
-          <h2>{event.planning ? 'Kolme avointa alustajapaikkaa.' : 'Kolme näkökulmaa, yksi yhteinen keskustelu.'}</h2>
+          <h2>{event.planning ? 'Alustajat ja avoimet paikat.' : 'Kolme näkökulmaa, yksi yhteinen keskustelu.'}</h2>
           <div class="speaker-detail-grid">
             {event.speakers.map((speaker) => (
               <article class="speaker-detail">
@@ -135,7 +135,7 @@ const speakerContactHref = `mailto:work@jarkkomoilanen.com?subject=${encodeURICo
                 <p class="speaker-title">{speaker.title}</p>
                 <h4>{speaker.topic}</h4>
                 <p>{speaker.description}</p>
-                {speaker.discussionPrompt && (event.planning ? <a class="discussion-prompt" href={speakerContactHref}>{speaker.discussionPrompt}</a> : <p class="discussion-prompt">{speaker.discussionPrompt}</p>)}
+                {speaker.discussionPrompt && (speaker.placeholder ? <a class="discussion-prompt" href={speakerContactHref}>{speaker.discussionPrompt}</a> : <p class="discussion-prompt">{speaker.discussionPrompt}</p>)}
               </article>
             ))}
           </div>

@@ -96,18 +96,18 @@ export const events: Event[] = [
     title: 'AI ETTÄ! -tapaaminen tammikuussa 2027',
     subtitle: 'Päivämäärä, agenda ja alustajat tarkentuvat.',
     description:
-      'Valmistelemme AI ETTÄ! -yhteisön tammikuun 2027 tapaamista. Päivämäärä ja keskustelun agenda tarkentuvat myöhemmin, mutta etsimme jo nyt kolme alustajaa avaamaan keskustelua omista näkökulmistaan.',
+      'Valmistelemme AI ETTÄ! -yhteisön tammikuun 2027 tapaamista. Päivämäärä ja keskustelun agenda tarkentuvat myöhemmin. Timo Lehtonen avaa keskustelua AI:n tuottaman koodin tarkistamisesta, ja etsimme lisää alustajia.',
     dateLabel: 'Tammikuu 2027 · päivämäärä tarkentuu',
     formatLabel: 'Toteutustapa tarkentuu',
     timezone: 'Europe/Helsinki',
     speakers: [
       {
-        name: 'Avoin alustajapaikka 1',
-        title: 'Ensimmäinen näkökulma',
-        topic: 'Haluatko avata keskustelun?',
-        description: 'Ehdota omaa näkökulmaasi tai keskustelunavausta AI ETTÄ! -yhteisölle.',
-        discussionPrompt: 'Ota yhteyttä ja jutellaan alustuksesta.',
-        placeholder: true,
+        name: 'Timo Lehtonen',
+        title: 'Alustaja',
+        topic: 'AI koodaa, tarvitaanko tarkistusta?',
+        description: 'Laki muuttuu, ja AI-agentti päivittää Kansalaisaloite-palvelun koodin. Muutos näyttää valmiilta – mutta voiko siihen luottaa? Timo vie keskustelun käytännön esimerkkiin, jossa koodin pitää toimia myös ihmisen tarkastelussa.',
+        discussionPrompt: 'Kuka tarkistaa AI:n työn – ja mistä tiedämme, että tarkistus riittää?',
+        photo: '/images/speakers/timo-lehtonen.png',
       },
       {
         name: 'Avoin alustajapaikka 2',
