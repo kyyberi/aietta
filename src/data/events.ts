@@ -103,7 +103,7 @@ export const events: Event[] = [
     speakers: [
       {
         name: 'Timo Lehtonen',
-        title: 'Alustaja',
+        title: 'AI arkkitehti',
         topic: 'AI koodaa, tarvitaanko tarkistusta?',
         description: 'Laki muuttuu, ja AI-agentti päivittää Kansalaisaloite-palvelun koodin. Muutos näyttää valmiilta – mutta voiko siihen luottaa? Timo vie keskustelun käytännön esimerkkiin, jossa koodin pitää toimia myös ihmisen tarkastelussa.',
         discussionPrompt: 'Kuka tarkistaa AI:n työn – ja mistä tiedämme, että tarkistus riittää?',
