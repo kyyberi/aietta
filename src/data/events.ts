@@ -105,7 +105,7 @@ export const events: Event[] = [
         name: 'Timo Lehtonen',
         title: 'AI arkkitehti',
         topic: 'AI koodaa, tarvitaanko tarkistusta?',
-        description: 'Laki muuttuu, ja AI-agentti päivittää Kansalaisaloite-palvelun koodin. Muutos näyttää valmiilta – mutta voiko siihen luottaa? Timo vie keskustelun käytännön esimerkkiin, jossa koodin pitää toimia myös ihmisen tarkastelussa.',
+        description: 'Laki muuttuu, ja AI-agentit päivittävät julkishallinnon verkkopalvelun avointa lähdekoodia (Open Source). Ohjelmistotehtaan (Software Factory) kokoonpanolinjastolla (Assembly line) tehty muutos näyttää valmiilta — mutta voiko siihen luottaa?',
         discussionPrompt: 'Kuka tarkistaa AI:n työn – ja mistä tiedämme, että tarkistus riittää?',
         photo: '/images/speakers/timo-lehtonen.png',
       },
